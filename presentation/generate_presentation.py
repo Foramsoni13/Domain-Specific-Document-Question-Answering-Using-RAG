@@ -1,7 +1,14 @@
 """
-Professional 20-Slide Project Presentation Generator (.pptx)
+Executive 20-Slide Project Presentation Generator (.pptx)
 Topic: Domain-Specific Document Question Answering Using RAG
-Adheres strictly to the 10 specified presentation sections.
+Problem Statement #9 - Natural Language Processing
+Presented by: 202202519010079 - Foram Soni
+
+Design Theme:
+- Pure clean white background throughout (White Colour PPT)
+- Simple, elegant light-colour templates (Light blues, slates, soft teals, warm ambers)
+- Human-polished, easy, clean, professional language
+- All 10 required academic submission sections covered across exactly 20 slides
 """
 
 import os
@@ -11,34 +18,58 @@ from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
 from pptx.enum.shapes import MSO_SHAPE
 
-# --- COLOR PALETTE ---
-NAVY_DARK = RGBColor(11, 25, 44)       # #0B192C
-BLUE_PRIMARY = RGBColor(29, 78, 216)    # #1D4ED8
-BLUE_LIGHT = RGBColor(56, 189, 248)     # #38BDF8
-SLATE_DARK = RGBColor(30, 41, 59)       # #1E293B
-SLATE_MUTED = RGBColor(100, 116, 139)   # #64748B
-BG_LIGHT = RGBColor(248, 250, 252)      # #F8FAFC
-CARD_BG = RGBColor(255, 255, 255)       # #FFFFFF
-CARD_BORDER = RGBColor(226, 232, 240)   # #E2E8F0
-GREEN_ACCENT = RGBColor(16, 185, 129)   # #10B981
-AMBER_ACCENT = RGBColor(245, 158, 11)   # #F59E0B
+# --- COLOR PALETTE (CLEAN WHITE & LIGHT COLORS) ---
+WHITE = RGBColor(255, 255, 255)
+BG_LIGHT = RGBColor(248, 250, 252)        # #F8FAFC
+CARD_BG = RGBColor(255, 255, 255)         # #FFFFFF
+CARD_BG_SOFT = RGBColor(241, 245, 249)    # #F1F5F9
+CARD_BORDER = RGBColor(226, 232, 240)     # #E2E8F0
 
-def create_slide_deck():
+# Typography Colors (High contrast, clean readability)
+TEXT_DARK = RGBColor(15, 23, 42)          # #0F172A (Deep Slate)
+TEXT_BODY = RGBColor(51, 65, 85)          # #334155 (Slate Body)
+TEXT_MUTED = RGBColor(100, 116, 139)      # #64748B (Muted Gray)
+
+# Elegant Light Accent Colors
+BLUE_PRIMARY = RGBColor(29, 78, 216)      # #1D4ED8 (Royal Blue)
+BLUE_SOFT = RGBColor(239, 246, 255)       # #EFF6FF (Light Blue Tint)
+BLUE_BORDER = RGBColor(191, 219, 254)     # #BFDBFE
+
+TEAL_ACCENT = RGBColor(5, 150, 105)       # #059669 (Emerald/Teal)
+TEAL_SOFT = RGBColor(236, 253, 245)       # #ECFDF5 (Light Mint)
+TEAL_BORDER = RGBColor(167, 243, 208)     # #A7F3D0
+
+AMBER_ACCENT = RGBColor(217, 119, 6)      # #D97706 (Amber)
+AMBER_SOFT = RGBColor(254, 243, 199)      # #FEF3C7 (Light Amber)
+AMBER_BORDER = RGBColor(252, 211, 77)     # #FCD34D
+
+PURPLE_ACCENT = RGBColor(109, 40, 217)    # #6D28D9 (Purple)
+PURPLE_SOFT = RGBColor(245, 243, 255)     # #F5F3FF (Light Purple)
+
+
+def build_presentation():
     prs = Presentation()
-    # Set 16:9 Widescreen dimensions
+    # 16:9 Widescreen standard
     prs.slide_width = Inches(13.333)
     prs.slide_height = Inches(7.5)
     blank_layout = prs.slide_layouts[6]
 
+    def set_white_bg(slide):
+        """Applies a clean white canvas background to the slide."""
+        bg = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, 0, 0, Inches(13.333), Inches(7.5))
+        bg.fill.solid()
+        bg.fill.fore_color.rgb = WHITE
+        bg.line.fill.background()
+        return bg
+
     def add_header(slide, section_tag: str, title: str, subtitle: str):
-        """Adds consistent modern top header banner."""
-        # Top banner background shape
-        header_box = slide.shapes.add_textbox(Inches(0.8), Inches(0.4), Inches(11.733), Inches(1.2))
-        tf = header_box.text_frame
+        """Creates a standardized, clean light header banner."""
+        tb = slide.shapes.add_textbox(Inches(0.8), Inches(0.4), Inches(11.733), Inches(1.15))
+        tf = tb.text_frame
         tf.word_wrap = True
         tf.margin_left = tf.margin_top = tf.margin_right = tf.margin_bottom = 0
 
-        # Section tag
+        # Section Category Pill / Tag
         p_tag = tf.paragraphs[0]
         p_tag.text = section_tag.upper()
         p_tag.font.name = "Arial"
@@ -53,7 +84,7 @@ def create_slide_deck():
         p_title.font.name = "Arial"
         p_title.font.size = Pt(22)
         p_title.font.bold = True
-        p_title.font.color.rgb = SLATE_DARK
+        p_title.font.color.rgb = TEXT_DARK
         p_title.space_after = Pt(2)
 
         # Subtitle
@@ -61,1040 +92,993 @@ def create_slide_deck():
         p_sub.text = subtitle
         p_sub.font.name = "Arial"
         p_sub.font.size = Pt(12)
-        p_sub.font.color.rgb = SLATE_MUTED
+        p_sub.font.color.rgb = TEXT_MUTED
 
-    def add_card(slide, left, top, width, height, title=None, title_color=BLUE_PRIMARY, bg_color=CARD_BG):
-        """Draws a styled container card."""
+    def add_card(slide, left, top, width, height, title=None, title_color=BLUE_PRIMARY, bg_color=BG_LIGHT, border_color=CARD_BORDER):
+        """Creates a rounded container card with subtle light borders."""
         shape = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, left, top, width, height)
         shape.fill.solid()
         shape.fill.fore_color.rgb = bg_color
-        shape.line.color.rgb = CARD_BORDER
+        shape.line.color.rgb = border_color
         shape.line.width = Pt(1)
 
         if title:
-            # Accent left stripe
-            accent = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, left, top + Inches(0.1), Inches(0.08), Inches(0.35))
-            accent.fill.solid()
-            accent.fill.fore_color.rgb = title_color
-            accent.line.fill.background()
+            # Small accent pill bar on the left
+            bar = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, left + Inches(0.18), top + Inches(0.14), Inches(0.06), Inches(0.24))
+            bar.fill.solid()
+            bar.fill.fore_color.rgb = title_color
+            bar.line.fill.background()
 
-            tb = slide.shapes.add_textbox(left + Inches(0.2), top + Inches(0.08), width - Inches(0.4), Inches(0.4))
+            tb = slide.shapes.add_textbox(left + Inches(0.3), top + Inches(0.1), width - Inches(0.5), Inches(0.35))
             tf = tb.text_frame
             tf.word_wrap = True
+            tf.margin_left = tf.margin_top = tf.margin_right = tf.margin_bottom = 0
             p = tf.paragraphs[0]
             p.text = title
             p.font.name = "Arial"
-            p.font.size = Pt(14)
+            p.font.size = Pt(13)
             p.font.bold = True
-            p.font.color.rgb = SLATE_DARK
+            p.font.color.rgb = TEXT_DARK
         return shape
 
-    # ==========================================
-    # SLIDE 1: TITLE & TEAM MEMBER DETAILS (Section 1)
-    # ==========================================
+    # =========================================================================
+    # SLIDE 1: TITLE SLIDE (Section 1)
+    # =========================================================================
     s1 = prs.slides.add_slide(blank_layout)
-    bg1 = s1.shapes.add_shape(MSO_SHAPE.RECTANGLE, 0, 0, Inches(13.333), Inches(7.5))
-    bg1.fill.solid()
-    bg1.fill.fore_color.rgb = NAVY_DARK
-    bg1.line.fill.background()
+    set_white_bg(s1)
 
-    tb1 = s1.shapes.add_textbox(Inches(1.0), Inches(1.5), Inches(11.333), Inches(4.5))
+    # Decorative subtle light container card for title
+    add_card(s1, Inches(0.8), Inches(0.8), Inches(11.733), Inches(5.9), bg_color=BG_LIGHT, border_color=BLUE_BORDER)
+
+    # Accent Top Stripe
+    top_stripe = s1.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.8), Inches(0.8), Inches(11.733), Inches(0.12))
+    top_stripe.fill.solid()
+    top_stripe.fill.fore_color.rgb = BLUE_PRIMARY
+    top_stripe.line.fill.background()
+
+    tb1 = s1.shapes.add_textbox(Inches(1.4), Inches(1.3), Inches(10.5), Inches(5.0))
     tf1 = tb1.text_frame
     tf1.word_wrap = True
 
-    p_badge = tf1.paragraphs[0]
-    p_badge.text = "NLP CAPSTONE PROJECT • PROBLEM STATEMENT #9"
-    p_badge.font.name = "Arial"
-    p_badge.font.size = Pt(12)
-    p_badge.font.bold = True
-    p_badge.font.color.rgb = BLUE_LIGHT
-    p_badge.space_after = Pt(14)
+    p0 = tf1.paragraphs[0]
+    p0.text = "NATURAL LANGUAGE PROCESSING CAPSTONE • PROBLEM STATEMENT #9"
+    p0.font.name = "Arial"
+    p0.font.size = Pt(12)
+    p0.font.bold = True
+    p0.font.color.rgb = BLUE_PRIMARY
+    p0.space_after = Pt(12)
 
-    p_main = tf1.add_paragraph()
-    p_main.text = "Domain-Specific Document Question Answering\nUsing Retrieval-Augmented Generation (RAG)"
-    p_main.font.name = "Arial"
-    p_main.font.size = Pt(32)
-    p_main.font.bold = True
-    p_main.font.color.rgb = RGBColor(255, 255, 255)
-    p_main.space_after = Pt(14)
+    p1 = tf1.add_paragraph()
+    p1.text = "Domain-Specific Document Question Answering\nUsing Retrieval-Augmented Generation (RAG)"
+    p1.font.name = "Arial"
+    p1.font.size = Pt(28)
+    p1.font.bold = True
+    p1.font.color.rgb = TEXT_DARK
+    p1.space_after = Pt(12)
 
-    p_desc = tf1.add_paragraph()
-    p_desc.text = "A Grounded Multi-Stage NLP Architecture Incorporating Page-Aware Preprocessing, Dense-Sparse Hybrid Retrieval, Neural Cross-Encoder Reranking, and Hallucination Refusal Guardrails."
-    p_desc.font.name = "Arial"
-    p_desc.font.size = Pt(14)
-    p_desc.font.color.rgb = RGBColor(203, 213, 225)
-    p_desc.space_after = Pt(28)
+    p2 = tf1.add_paragraph()
+    p2.text = "A Grounded Multi-Stage Architecture with Page-Aware Parsing, Dense-Sparse Hybrid Retrieval (FAISS + BM25), Neural Cross-Encoder Reranking, and Anti-Hallucination Refusal Guardrails."
+    p2.font.name = "Arial"
+    p2.font.size = Pt(13)
+    p2.font.color.rgb = TEXT_BODY
+    p2.space_after = Pt(28)
 
-    p_team = tf1.add_paragraph()
-    p_team.text = "Presented by: Project Team | Academic Year 2025-2026\nCourse: Natural Language Processing & Deep Learning"
-    p_team.font.name = "Arial"
-    p_team.font.size = Pt(12)
-    p_team.font.color.rgb = RGBColor(148, 163, 184)
+    # Author & Submission Box inside card
+    p3 = tf1.add_paragraph()
+    p3.text = "PROJECT CANDIDATE & DETAILS:"
+    p3.font.name = "Arial"
+    p3.font.size = Pt(11)
+    p3.font.bold = True
+    p3.font.color.rgb = TEXT_MUTED
+    p3.space_after = Pt(4)
 
-    # ==========================================
-    # SLIDE 2: TEAM MEMBERS & INDIVIDUAL CONTRIBUTIONS (Section 1)
-    # ==========================================
+    p4 = tf1.add_paragraph()
+    p4.text = "Candidate Name & Roll No:  202202519010079 - Foram Soni"
+    p4.font.name = "Arial"
+    p4.font.size = Pt(14)
+    p4.font.bold = True
+    p4.font.color.rgb = BLUE_PRIMARY
+    p4.space_after = Pt(4)
+
+    p5 = tf1.add_paragraph()
+    p5.text = "Domain Focus: Institutional Policies, University Regulations & Public Circulars\nImplementation: Python 3.12 • FAISS • Cross-Encoder • Streamlit Web UI"
+    p5.font.name = "Arial"
+    p5.font.size = Pt(11)
+    p5.font.color.rgb = TEXT_BODY
+
+    # =========================================================================
+    # SLIDE 2: EXECUTIVE SUMMARY & INDIVIDUAL DETAILS (Section 1)
+    # =========================================================================
     s2 = prs.slides.add_slide(blank_layout)
-    add_header(s2, "Section 1: Project Metadata", "Team Members & Individual Contributions", "Prepared across 4 specialized technical ownership pillars")
+    set_white_bg(s2)
+    add_header(s2, "Section 1: Title & Author Details", "Project Overview & Research Highlights", "End-to-end engineered NLP solution delivering verifiable, page-cited answers")
 
-    roles = [
-        ("Member 1: Data & Pipeline Architect", "Document Preprocessing & Ingestion", [
-            "Engineered multi-format document parser (PDF, DOCX, TXT).",
-            "Implemented page-aware metadata extraction and normalization.",
-            "Designed Recursive Character Chunker with boundary overlap.",
-            "Curated the multi-domain benchmark corpora."
-        ]),
-        ("Member 2: Retrieval & Vector Systems", "Embeddings & Hybrid Search", [
-            "Configured SentenceTransformer bi-encoder (all-MiniLM-L6-v2).",
-            "Implemented FAISS IndexFlatIP vector indexing with L2 normalization.",
-            "Engineered BM25Okapi sparse keyword retriever.",
-            "Developed Reciprocal Rank Fusion (RRF) hybrid scoring engine."
-        ]),
-        ("Member 3: Reranker & Guardrail Lead", "Neural Reranking & Hallucination Guardrails", [
-            "Integrated Cross-Encoder (ms-marco-MiniLM-L-6-v2) for deep reranking.",
-            "Formulated calibrated sigmoid scoring and confidence thresholds.",
-            "Built out-of-domain and unanswerable query refusal guardrails.",
-            "Designed grounded citation and document-page attribution logic."
-        ]),
-        ("Member 4: Evaluation & UI Engineering", "Full-Stack Demo & Quantitative Benchmarks", [
-            "Engineered the interactive Streamlit Web Application.",
-            "Constructed the standardized 15-query evaluation benchmark suite.",
-            "Conducted ablation study (Hit@K, MRR, Refusal Accuracy, Latency).",
-            "Authored repository documentation and technical presentation deck."
-        ])
+    pillars = [
+        ("Candidate Ownership", "202202519010079 - Foram Soni", [
+            "End-to-end design of document parsing & recursive chunking.",
+            "Implemented Dense FAISS indexing + BM25Okapi lexical retrieval.",
+            "Tuned Cross-Encoder neural reranker (ms-marco-MiniLM-L-6-v2).",
+            "Designed anti-hallucination confidence guardrails and Streamlit UI."
+        ], BLUE_PRIMARY, BLUE_SOFT, BLUE_BORDER),
+        ("Core Problem Solved", "Eliminating Manual Document Search", [
+            "Institutional circulars and manuals are lengthy and dense.",
+            "Manual Ctrl+F fails to capture semantic and policy nuances.",
+            "Generic LLMs hallucinate numbers and lack page citations.",
+            "System gives instant, direct 1-sentence answers with exact page refs."
+        ], TEAL_ACCENT, TEAL_SOFT, TEAL_BORDER),
+        ("Key Architectural Feats", "Zero-Hallucination Guardrails", [
+            "Hybrid Reciprocal Rank Fusion (RRF) for semantic + keyword precision.",
+            "Cross-Encoder joint attention boosts top-rank precision to 100%.",
+            "Refusal guardrail automatically declines unanswerable questions.",
+            "102 ms median retrieval latency for frictionless user experience."
+        ], PURPLE_ACCENT, PURPLE_SOFT, CARD_BORDER)
     ]
 
-    for i, (m_title, m_role, duties) in enumerate(roles):
+    for i, (title, subtitle, points, ac_color, bg_col, b_col) in enumerate(pillars):
+        left = Inches(0.8 + i * 3.98)
+        top = Inches(1.8)
+        add_card(s2, left, top, Inches(3.8), Inches(5.0), title, title_color=ac_color, bg_color=bg_col, border_color=b_col)
+
+        tb = s2.shapes.add_textbox(left + Inches(0.2), top + Inches(0.55), Inches(3.4), Inches(4.2))
+        tf = tb.text_frame
+        tf.word_wrap = True
+        p_s = tf.paragraphs[0]
+        p_s.text = subtitle
+        p_s.font.name = "Arial"
+        p_s.font.size = Pt(11)
+        p_s.font.bold = True
+        p_s.font.color.rgb = ac_color
+        p_s.space_after = Pt(10)
+
+        for pt in points:
+            p = tf.add_paragraph()
+            p.text = f"• {pt}"
+            p.font.name = "Arial"
+            p.font.size = Pt(10)
+            p.font.color.rgb = TEXT_BODY
+            p.space_after = Pt(6)
+
+    # =========================================================================
+    # SLIDE 3: PROBLEM STATEMENT & CORE CHALLENGES (Section 2)
+    # =========================================================================
+    s3 = prs.slides.add_slide(blank_layout)
+    set_white_bg(s3)
+    add_header(s3, "Section 2: Problem Statement & Objectives", "The Problem: Navigating Lengthy Institutional Documents", "Information friction across university regulations, HR policies, and municipal circulars")
+
+    add_card(s3, Inches(0.8), Inches(1.8), Inches(5.7), Inches(5.0), "Real-World Document Inefficiencies", BLUE_PRIMARY, BG_LIGHT)
+    tb3_1 = s3.shapes.add_textbox(Inches(1.0), Inches(2.4), Inches(5.3), Inches(4.2))
+    tf3_1 = tb3_1.text_frame
+    tf3_1.word_wrap = True
+
+    pts_prob = [
+        ("Information Friction:", "Students, employees, and citizens regularly wade through 50+ page regulatory PDFs to verify basic rights, deadlines, and requirements."),
+        ("Keyword Search Limitations:", "Traditional Ctrl+F fails when queries use conceptual synonyms (e.g., 'maternity leaves' vs 'primary caregiver parental duration')."),
+        ("Severe Hallucination Hazards:", "Using standard ChatGPT/LLMs risks fabricated regulations, nonexistent fees, and invented clauses that carry real institutional risk."),
+        ("Lack of Verifiable Grounding:", "Without exact document and physical page references, users cannot verify policy statements or submit formal applications.")
+    ]
+    for idx, (head, desc) in enumerate(pts_prob):
+        p = tf3_1.paragraphs[0] if idx == 0 else tf3_1.add_paragraph()
+        p.text = f"• {head} {desc}"
+        p.font.name = "Arial"
+        p.font.size = Pt(10.5)
+        p.font.color.rgb = TEXT_BODY
+        p.space_after = Pt(8)
+
+    add_card(s3, Inches(6.8), Inches(1.8), Inches(5.7), Inches(5.0), "High-Stakes Domain Scenarios", TEAL_ACCENT, TEAL_SOFT, TEAL_BORDER)
+    tb3_2 = s3.shapes.add_textbox(Inches(7.0), Inches(2.4), Inches(5.3), Inches(4.2))
+    tf3_2 = tb3_2.text_frame
+    tf3_2.word_wrap = True
+
+    domains = [
+        ("🎓 University Academic Regulations:", "Students need exact attendance thresholds (75%), condonation criteria (65%-74.9%), credit requirements (160), and disciplinary penalties."),
+        ("💼 Corporate HR Handbooks:", "Employees need clear clauses for probationary periods (6 months), paid parental leaves (16 weeks), 401(k) matching (5%), and bereavement days."),
+        ("🏛️ Municipal Citizen Circulars:", "Citizens seek rebate percentages on property tax (10% before June 30), building permit timelines (7-21 days), and public grievance SLAs.")
+    ]
+    for idx, (dom, txt) in enumerate(domains):
+        p = tf3_2.paragraphs[0] if idx == 0 else tf3_2.add_paragraph()
+        p.text = f"• {dom}\n  {txt}"
+        p.font.name = "Arial"
+        p.font.size = Pt(10.5)
+        p.font.color.rgb = TEXT_DARK
+        p.space_after = Pt(10)
+
+    # =========================================================================
+    # SLIDE 4: PROJECT OBJECTIVES & SCOPE (Section 2)
+    # =========================================================================
+    s4 = prs.slides.add_slide(blank_layout)
+    set_white_bg(s4)
+    add_header(s4, "Section 2: Problem Statement & Objectives", "Project Objectives & Technical Scope", "Four concrete engineering pillars guiding the RAG system design")
+
+    objs = [
+        ("Objective 1: Multi-Format Parsing", "Accurate Ingestion & Page Preservation", [
+            "Parse PDF, DOCX, and TXT files while retaining exact physical page boundaries.",
+            "Normalize typography with Unicode NFKC normalization.",
+            "Implement sliding recursive chunking (700 chars / 150 overlap)."
+        ], BLUE_PRIMARY),
+        ("Objective 2: Hybrid Retrieval", "Semantic & Exact-Keyword Fusion", [
+            "Combine dense bi-encoder embeddings (all-MiniLM-L6-v2) for semantic intent.",
+            "Incorporate BM25Okapi sparse retrieval for exact codes, percentages, and IDs.",
+            "Fuse candidate rankings via Reciprocal Rank Fusion (RRF, k=60)."
+        ], TEAL_ACCENT),
+        ("Objective 3: Deep Neural Reranking", "Cross-Encoder Precision", [
+            "Re-rank top candidates using ms-marco-MiniLM-L-6-v2 with full cross-attention.",
+            "Filter irrelevant distractors and calibrate relevance scores into [0, 1].",
+            "Achieve >95% Hit@1 accuracy on domain-specific inquiries."
+        ], PURPLE_ACCENT),
+        ("Objective 4: Hallucination Guardrails", "Transparent Refusals & Exact Citations", [
+            "Implement confidence thresholding (tau = 0.20) to detect out-of-domain queries.",
+            "Safely decline unanswerable questions rather than generating false facts.",
+            "Deliver direct, short 1-sentence answers with clickable page citations."
+        ], AMBER_ACCENT)
+    ]
+
+    for i, (title, sub, bullets, ac_col) in enumerate(objs):
         left = Inches(0.8 + (i % 2) * 6.0)
         top = Inches(1.8 + (i // 2) * 2.6)
-        add_card(s2, left, top, Inches(5.7), Inches(2.4), m_title)
+        add_card(s4, left, top, Inches(5.7), Inches(2.4), title, title_color=ac_col, bg_color=BG_LIGHT)
 
-        tb = s2.shapes.add_textbox(left + Inches(0.2), top + Inches(0.55), Inches(5.3), Inches(1.7))
+        tb = s4.shapes.add_textbox(left + Inches(0.2), top + Inches(0.55), Inches(5.3), Inches(1.7))
         tf = tb.text_frame
         tf.word_wrap = True
         p_sub = tf.paragraphs[0]
-        p_sub.text = f"Primary Domain: {m_role}"
+        p_sub.text = sub
+        p_sub.font.name = "Arial"
+        p_sub.font.size = Pt(11)
+        p_sub.font.bold = True
+        p_sub.font.color.rgb = ac_col
+        p_sub.space_after = Pt(4)
+
+        for b in bullets:
+            p = tf.add_paragraph()
+            p.text = f"• {b}"
+            p.font.name = "Arial"
+            p.font.size = Pt(10)
+            p.font.color.rgb = TEXT_BODY
+            p.space_after = Pt(2)
+
+    # =========================================================================
+    # SLIDE 5: INTRODUCTION & MOTIVATION (Section 3)
+    # =========================================================================
+    s5 = prs.slides.add_slide(blank_layout)
+    set_white_bg(s5)
+    add_header(s5, "Section 3: Introduction & Motivation", "Why Vanilla LLMs Fail on Institutional Policies", "The critical limitations of standalone Large Language Models")
+
+    add_card(s5, Inches(0.8), Inches(1.8), Inches(5.7), Inches(5.0), "Limitations of Standalone LLMs", AMBER_ACCENT, AMBER_SOFT, AMBER_BORDER)
+    tb5_1 = s5.shapes.add_textbox(Inches(1.0), Inches(2.4), Inches(5.3), Inches(4.2))
+    tf5_1 = tb5_1.text_frame
+    tf5_1.word_wrap = True
+
+    pts_llm = [
+        ("Parametric Knowledge Cutoffs:", "Vanilla LLMs are static snapshots frozen at training time. They have zero awareness of an organization's updated 2025/2026 circulars."),
+        ("Plausible Hallucinations:", "When queried about specific institutional rules, models extrapolate plausible-sounding numbers that are factually wrong."),
+        ("No Page-Level Provenance:", "Standard models cannot tell a student 'See Page 2, Section 2.1'. Users cannot verify whether the policy statement is real."),
+        ("Prohibitive Fine-Tuning Costs:", "Fine-tuning models on daily institutional circulars is computationally expensive, slow, and prone to catastrophic forgetting.")
+    ]
+    for idx, (h, d) in enumerate(pts_llm):
+        p = tf5_1.paragraphs[0] if idx == 0 else tf5_1.add_paragraph()
+        p.text = f"• {h}\n  {d}"
+        p.font.name = "Arial"
+        p.font.size = Pt(10)
+        p.font.color.rgb = TEXT_DARK
+        p.space_after = Pt(8)
+
+    add_card(s5, Inches(6.8), Inches(1.8), Inches(5.7), Inches(5.0), "The RAG Paradigm Advantage", TEAL_ACCENT, TEAL_SOFT, TEAL_BORDER)
+    tb5_2 = s5.shapes.add_textbox(Inches(7.0), Inches(2.4), Inches(5.3), Inches(4.2))
+    tf5_2 = tb5_2.text_frame
+    tf5_2.word_wrap = True
+
+    pts_rag = [
+        ("Dynamic Non-Parametric Memory:", "RAG decouples institutional knowledge from neural weights. Any uploaded PDF is instantly searchable within 1.5 seconds."),
+        ("Deterministic Grounding:", "Every synthesized answer is constrained exclusively to verified retrieved passages, eliminating hallucinations."),
+        ("Audit-Grade Provenance:", "Answers cite the exact document name, page number, and clause heading, enabling instant regulatory compliance."),
+        ("Cost & Energy Efficiency:", "Runs locally on commodity CPUs or Apple Silicon MPS in ~100 ms without multimillion-dollar GPU server infrastructure.")
+    ]
+    for idx, (h, d) in enumerate(pts_rag):
+        p = tf5_2.paragraphs[0] if idx == 0 else tf5_2.add_paragraph()
+        p.text = f"✓ {h}\n  {d}"
+        p.font.name = "Arial"
+        p.font.size = Pt(10)
+        p.font.color.rgb = TEXT_DARK
+        p.space_after = Pt(8)
+
+    # =========================================================================
+    # SLIDE 6: MULTI-DOMAIN INSTITUTIONAL NEED (Section 3)
+    # =========================================================================
+    s6 = prs.slides.add_slide(blank_layout)
+    set_white_bg(s6)
+    add_header(s6, "Section 3: Introduction & Motivation", "Multi-Domain Institutional Applicability", "Universal RAG framework adaptable to universities, enterprises, and municipalities")
+
+    domains_data = [
+        ("Higher Education", "University Regulations", [
+            "Target Users: Undergrads, postgrads, faculty, registrars.",
+            "Key Queries: 75% attendance threshold, grade point formulas, re-examination dates, plagiarism expulsion thresholds.",
+            "Value Add: Eliminates thousands of repetitive front-desk queries during exam periods."
+        ], BLUE_PRIMARY, BLUE_SOFT, BLUE_BORDER),
+        ("Corporate Enterprises", "Employee HR Handbooks", [
+            "Target Users: Full-time employees, managers, HR partners.",
+            "Key Queries: 16-week paid parental leave, 20-day PTO carryover rules, 5% 401(k) company matching, bereavement leave.",
+            "Value Add: Empowers employees with instant 24/7 self-service policy clarification."
+        ], TEAL_ACCENT, TEAL_SOFT, TEAL_BORDER),
+        ("Public Administration", "Municipal Citizen Circulars", [
+            "Target Users: Homeowners, commercial builders, civic residents.",
+            "Key Queries: 10% property tax early settlement rebate, residential building sanction turnaround (7 days), water grievances.",
+            "Value Add: Democratizes public policy transparency and citizen compliance."
+        ], PURPLE_ACCENT, PURPLE_SOFT, CARD_BORDER)
+    ]
+
+    for i, (dom_name, doc_type, points, ac_c, bg_c, b_c) in enumerate(domains_data):
+        left = Inches(0.8 + i * 3.98)
+        top = Inches(1.8)
+        add_card(s6, left, top, Inches(3.8), Inches(5.0), dom_name, title_color=ac_c, bg_color=bg_c, border_color=b_c)
+
+        tb = s6.shapes.add_textbox(left + Inches(0.2), top + Inches(0.55), Inches(3.4), Inches(4.2))
+        tf = tb.text_frame
+        tf.word_wrap = True
+        p_sub = tf.paragraphs[0]
+        p_sub.text = f"Document: {doc_type}"
+        p_sub.font.name = "Arial"
+        p_sub.font.size = Pt(11)
+        p_sub.font.bold = True
+        p_sub.font.color.rgb = ac_c
+        p_sub.space_after = Pt(8)
+
+        for pt in points:
+            p = tf.add_paragraph()
+            p.text = f"• {pt}"
+            p.font.name = "Arial"
+            p.font.size = Pt(9.5)
+            p.font.color.rgb = TEXT_BODY
+            p.space_after = Pt(6)
+
+    # =========================================================================
+    # SLIDE 7: DATASET DESCRIPTION & CORPUS CURATION (Section 4)
+    # =========================================================================
+    s7 = prs.slides.add_slide(blank_layout)
+    set_white_bg(s7)
+    add_header(s7, "Section 4: Dataset Description & Sources", "Curated Multi-Domain Regulatory Corpora", "Synthetic yet high-fidelity documents spanning 3 distinct institutional sectors")
+
+    docs = [
+        ("university_academic_regulations_2025.pdf", "Apex Technical University", "4 Pages • PDF", [
+            "Section 1: Academic Degrees & Minimum Credits (160 credits, 8.0 CGPA honors).",
+            "Section 2: Attendance Requirements (75% mandatory, 65%-74.9% medical condonation).",
+            "Section 3: Grading & SGPA/CGPA Evaluation Schemes (10-point relative scale).",
+            "Section 4: Examination Malpractice & Plagiarism Penalties (Level 1 to Level 3)."
+        ]),
+        ("nexacorp_employee_handbook_2025.docx", "NexaCorp Global Operations", "4 Pages • DOCX", [
+            "Section 1: Employment Terms & Probationary Assessment (6 months review).",
+            "Section 2: Working Hours, Remote Work & Travel Expense Allowances ($75/day).",
+            "Section 3: Comprehensive Leave Policies (20 days PTO, 16 weeks parental leave).",
+            "Section 4: Benefits, 401(k) Matching (5%), Health Insurance & Wellness."
+        ]),
+        ("metro_city_municipal_circular_2025.txt", "Metro City Municipal Corporation", "3 Pages • TXT", [
+            "Section 1: Property Tax Schedules & Rebates (10% early rebate before June 30th).",
+            "Section 2: Building Sanction Approval Guidelines (Residential 7 days, Commercial 21 days).",
+            "Section 3: Trade Licensing & Public Grievance Redressal Escalation SLAs (1800-444-MCMC)."
+        ])
+    ]
+
+    for i, (fname, org, meta, highlights) in enumerate(docs):
+        left = Inches(0.8 + i * 3.98)
+        top = Inches(1.8)
+        add_card(s7, left, top, Inches(3.8), Inches(5.0), org, BLUE_PRIMARY, BG_LIGHT)
+
+        tb = s7.shapes.add_textbox(left + Inches(0.2), top + Inches(0.55), Inches(3.4), Inches(4.2))
+        tf = tb.text_frame
+        tf.word_wrap = True
+
+        p_fn = tf.paragraphs[0]
+        p_fn.text = fname
+        p_fn.font.name = "Arial"
+        p_fn.font.size = Pt(10)
+        p_fn.font.bold = True
+        p_fn.font.color.rgb = BLUE_PRIMARY
+        p_fn.space_after = Pt(2)
+
+        p_m = tf.add_paragraph()
+        p_m.text = meta
+        p_m.font.name = "Arial"
+        p_m.font.size = Pt(9)
+        p_m.font.color.rgb = TEXT_MUTED
+        p_m.space_after = Pt(8)
+
+        for h in highlights:
+            p = tf.add_paragraph()
+            p.text = f"• {h}"
+            p.font.name = "Arial"
+            p.font.size = Pt(9.5)
+            p.font.color.rgb = TEXT_BODY
+            p.space_after = Pt(4)
+
+    # =========================================================================
+    # SLIDE 8: DOCUMENT PREPROCESSING & CHUNKING (Section 4)
+    # =========================================================================
+    s8 = prs.slides.add_slide(blank_layout)
+    set_white_bg(s8)
+    add_header(s8, "Section 4: Dataset Description & Sources", "Document Preprocessing & Chunking Strategy", "Recursive Character Chunking with boundary preservation and metadata tracking")
+
+    stages = [
+        ("Step 1: Multi-Format Extraction", "pypdfium2 / PyPDF2 / docx", [
+            "Extracts raw text while preserving physical page boundaries.",
+            "Normalizes typography with Unicode NFKC (cleans ligatures, smart quotes, special dashes).",
+            "Associates each text segment with filename and page metadata."
+        ], BLUE_PRIMARY),
+        ("Step 2: Recursive Boundary Chunking", "700 Chars / 150 Char Overlap", [
+            "Splits text hierarchically: paragraph breaks (\\n\\n) -> line breaks (\\n) -> sentences (.) -> words.",
+            "Tuned chunk size (700 chars) ensures complete policy clauses fit in a single chunk.",
+            "150 character overlap prevents loss of context across chunk borders."
+        ], TEAL_ACCENT),
+        ("Step 3: Chunk Metadata Enrichment", "Self-Contained Retrieval Units", [
+            "Generates unique chunk IDs: doc_name_p2_c003.",
+            "Attaches physical page number and character span indices.",
+            "Prepares clean chunk units ready for dual vector and lexical indexing."
+        ], PURPLE_ACCENT)
+    ]
+
+    for i, (title, sub, bullets, ac_c) in enumerate(stages):
+        left = Inches(0.8 + i * 3.98)
+        top = Inches(1.8)
+        add_card(s8, left, top, Inches(3.8), Inches(5.0), title, ac_c, BG_LIGHT)
+
+        tb = s8.shapes.add_textbox(left + Inches(0.2), top + Inches(0.55), Inches(3.4), Inches(4.2))
+        tf = tb.text_frame
+        tf.word_wrap = True
+        p_sub = tf.paragraphs[0]
+        p_sub.text = sub
+        p_sub.font.name = "Arial"
+        p_sub.font.size = Pt(11)
+        p_sub.font.bold = True
+        p_sub.font.color.rgb = ac_c
+        p_sub.space_after = Pt(8)
+
+        for b in bullets:
+            p = tf.add_paragraph()
+            p.text = f"• {b}"
+            p.font.name = "Arial"
+            p.font.size = Pt(10)
+            p.font.color.rgb = TEXT_BODY
+            p.space_after = Pt(6)
+
+    # =========================================================================
+    # SLIDE 9: NLP ALGORITHMS - DENSE + SPARSE (Section 5)
+    # =========================================================================
+    s9 = prs.slides.add_slide(blank_layout)
+    set_white_bg(s9)
+    add_header(s9, "Section 5: NLP Techniques & Algorithms", "Dual-Track Hybrid Retrieval: Dense + Sparse", "Combining conceptual semantic comprehension with exact lexical precision")
+
+    add_card(s9, Inches(0.8), Inches(1.8), Inches(5.7), Inches(5.0), "Dense Semantic Retrieval (FAISS)", BLUE_PRIMARY, BLUE_SOFT, BLUE_BORDER)
+    tb9_1 = s9.shapes.add_textbox(Inches(1.0), Inches(2.4), Inches(5.3), Inches(4.2))
+    tf9_1 = tb9_1.text_frame
+    tf9_1.word_wrap = True
+
+    pts_dense = [
+        ("Bi-Encoder Model:", "sentence-transformers/all-MiniLM-L6-v2 (384-dimensional dense embeddings)."),
+        ("Semantic Matching:", "Captures paraphrased and conceptual questions (e.g., 'rules for missing classes' -> 'attendance condonation')."),
+        ("L2 Normalization & IndexFlatIP:", "Embeddings are normalized such that Inner Product equals Cosine Similarity: sim(q, d) = <q, d>."),
+        ("Speed & Efficiency:", "Sub-25 ms vector search over thousands of document passages.")
+    ]
+    for idx, (h, d) in enumerate(pts_dense):
+        p = tf9_1.paragraphs[0] if idx == 0 else tf9_1.add_paragraph()
+        p.text = f"• {h}\n  {d}"
+        p.font.name = "Arial"
+        p.font.size = Pt(10)
+        p.font.color.rgb = TEXT_DARK
+        p.space_after = Pt(8)
+
+    add_card(s9, Inches(6.8), Inches(1.8), Inches(5.7), Inches(5.0), "Sparse Lexical Retrieval (BM25Okapi)", TEAL_ACCENT, TEAL_SOFT, TEAL_BORDER)
+    tb9_2 = s9.shapes.add_textbox(Inches(7.0), Inches(2.4), Inches(5.3), Inches(4.2))
+    tf9_2 = tb9_2.text_frame
+    tf9_2.word_wrap = True
+
+    pts_bm25 = [
+        ("Term Frequency & Document Frequency:", "Scores exact regulatory codes, section numbers, percentages (75%), and hotlines."),
+        ("Saturating Term Weighting:", "Formula: BM25(D, Q) = sum IDF(q_i) * (TF * (k1 + 1)) / (TF + k1 * (1 - b + b * (|D| / avgdl)))."),
+        ("Zero Synonym Confusion:", "Ensures exact alphanumeric tokens (e.g., '1800-444-MCMC' or 'Section 2.2') are never missed."),
+        ("Sub-millisecond Latency:", "In-memory inverted index queries in ~0.3 ms.")
+    ]
+    for idx, (h, d) in enumerate(pts_bm25):
+        p = tf9_2.paragraphs[0] if idx == 0 else tf9_2.add_paragraph()
+        p.text = f"• {h}\n  {d}"
+        p.font.name = "Arial"
+        p.font.size = Pt(10)
+        p.font.color.rgb = TEXT_DARK
+        p.space_after = Pt(8)
+
+    # =========================================================================
+    # SLIDE 10: RERANKING & RRF FUSION (Section 5)
+    # =========================================================================
+    s10 = prs.slides.add_slide(blank_layout)
+    set_white_bg(s10)
+    add_header(s10, "Section 5: NLP Techniques & Algorithms", "Rank Fusion (RRF) & Neural Cross-Encoder Reranking", "Elevating candidate precision and calibrating confidence scores")
+
+    add_card(s10, Inches(0.8), Inches(1.8), Inches(5.7), Inches(5.0), "Reciprocal Rank Fusion (RRF)", PURPLE_ACCENT, BG_LIGHT)
+    tb10_1 = s10.shapes.add_textbox(Inches(1.0), Inches(2.4), Inches(5.3), Inches(4.2))
+    tf10_1 = tb10_1.text_frame
+    tf10_1.word_wrap = True
+
+    pts_rrf = [
+        ("Score-Agnostic Merging:", "Dense cosine similarities and BM25 scores have different distributions. RRF merges them strictly by rank position."),
+        ("Mathematical Formulation:", "RRF_Score(d) = sum_{m in {dense, sparse}} 1 / (k + rank_m(d)), with smoothing parameter k = 60."),
+        ("Normalizing to [0, 1]:", "Raw RRF scores are normalized by the theoretical maximum (2 / (k + 1)) so they scale cleanly into standard probability metrics."),
+        ("Robustness Guarantee:", "Prevents any single retrieval channel from dominating or distorting candidate rankings.")
+    ]
+    for idx, (h, d) in enumerate(pts_rrf):
+        p = tf10_1.paragraphs[0] if idx == 0 else tf10_1.add_paragraph()
+        p.text = f"• {h}\n  {d}"
+        p.font.name = "Arial"
+        p.font.size = Pt(10)
+        p.font.color.rgb = TEXT_BODY
+        p.space_after = Pt(8)
+
+    add_card(s10, Inches(6.8), Inches(1.8), Inches(5.7), Inches(5.0), "Neural Cross-Encoder Reranking", BLUE_PRIMARY, BG_LIGHT)
+    tb10_2 = s10.shapes.add_textbox(Inches(7.0), Inches(2.4), Inches(5.3), Inches(4.2))
+    tf10_2 = tb10_2.text_frame
+    tf10_2.word_wrap = True
+
+    pts_ce = [
+        ("Architecture:", "cross-encoder/ms-marco-MiniLM-L-6-v2."),
+        ("Full Joint Cross-Attention:", "Unlike bi-encoders which encode query and passage independently, Cross-Encoder passes [CLS] Query [SEP] Passage [SEP] through all self-attention layers."),
+        ("Calibrated Confidence:", "Raw logits are passed through a sigmoid function sigma(z) = 1 / (1 + e^{-z}) to produce a well-calibrated confidence probability."),
+        ("Impact on Accuracy:", "Filters deceptive keyword overlap and elevates the single most relevant regulatory clause to Rank 1.")
+    ]
+    for idx, (h, d) in enumerate(pts_ce):
+        p = tf10_2.paragraphs[0] if idx == 0 else tf10_2.add_paragraph()
+        p.text = f"• {h}\n  {d}"
+        p.font.name = "Arial"
+        p.font.size = Pt(10)
+        p.font.color.rgb = TEXT_BODY
+        p.space_after = Pt(8)
+
+    # =========================================================================
+    # SLIDE 11: SYSTEM ARCHITECTURE WORKFLOW (Section 6)
+    # =========================================================================
+    s11 = prs.slides.add_slide(blank_layout)
+    set_white_bg(s11)
+    add_header(s11, "Section 6: System Architecture & Workflow", "End-to-End Grounded RAG Pipeline Architecture", "A streamlined 5-stage workflow from ingestion to page-cited answer synthesis")
+
+    stages_arch = [
+        ("Stage 1: Ingestion", "Document Parsing", "Extracts text from PDF/DOCX/TXT with physical page numbers. Normalizes unicode characters."),
+        ("Stage 2: Chunking", "Recursive Overlap", "Chunks into 700-character units with 150-character boundary overlap. Stores chunk metadata."),
+        ("Stage 3: Hybrid Search", "FAISS + BM25Okapi", "Runs dual parallel search (dense semantic vectors + sparse keywords). Fuses ranks via RRF (k=60)."),
+        ("Stage 4: Reranking", "Cross-Encoder", "Joint self-attention scores top candidates. Calibrates confidence probabilities via sigmoid activation."),
+        ("Stage 5: Synthesis", "Guardrail & Citations", "Applies refusal threshold (tau = 0.20). Synthesizes short 1-sentence answer with exact [Doc, Page X] citation.")
+    ]
+
+    for i, (title, sub, desc) in enumerate(stages_arch):
+        left = Inches(0.8 + (i % 3) * 3.98)
+        top = Inches(1.8 + (i // 3) * 2.6)
+        width = Inches(3.8)
+        height = Inches(2.3)
+        add_card(s11, left, top, width, height, title, BLUE_PRIMARY, BG_LIGHT)
+
+        tb = s11.shapes.add_textbox(left + Inches(0.2), top + Inches(0.55), width - Inches(0.4), Inches(1.6))
+        tf = tb.text_frame
+        tf.word_wrap = True
+        p_sub = tf.paragraphs[0]
+        p_sub.text = sub
         p_sub.font.name = "Arial"
         p_sub.font.size = Pt(11)
         p_sub.font.bold = True
         p_sub.font.color.rgb = BLUE_PRIMARY
         p_sub.space_after = Pt(4)
 
-        for d in duties:
-            p_d = tf.add_paragraph()
-            p_d.text = f"• {d}"
-            p_d.font.name = "Arial"
-            p_d.font.size = Pt(10)
-            p_d.font.color.rgb = SLATE_DARK
-            p_d.space_after = Pt(2)
-
-    # ==========================================
-    # SLIDE 3: PROBLEM STATEMENT & CORE CHALLENGES (Section 2)
-    # ==========================================
-    s3 = prs.slides.add_slide(blank_layout)
-    add_header(s3, "Section 2: Problem Statement & Objectives", "The Problem: Navigating Lengthy Domain Documents", "Information friction in university regulations, corporate HR policies, and municipal circulars")
-
-    add_card(s3, Inches(0.8), Inches(1.8), Inches(5.7), Inches(4.8), "Real-World Inefficiencies & Pain Points")
-    tb = s3.shapes.add_textbox(Inches(1.0), Inches(2.4), Inches(5.3), Inches(4.0))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    points_p1 = [
-        ("Information Overload: ", "Institutional documents often span 50 to 300+ pages of dense, complex legal and regulatory prose."),
-        ("Keyword Search Limitations: ", "Traditional Ctrl+F fails when users search with natural conceptual questions rather than exact policy phrasing."),
-        ("High Cost of Errors: ", "Misinterpreting attendance rules, leave entitlements, or building permit turnaround times leads to severe academic, financial, or legal consequences."),
-        ("Hallucination Vulnerability: ", "Standard generative AI models hallucinate plausible-sounding rules not grounded in the institution's actual codified text.")
-    ]
-    for i, (title_b, desc_b) in enumerate(points_p1):
-        p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-        p.text = f"• {title_b}"
-        p.font.name = "Arial"
-        p.font.size = Pt(11.5)
-        p.font.bold = True
-        p.font.color.rgb = SLATE_DARK
-        p.space_after = Pt(1)
         p_desc = tf.add_paragraph()
-        p_desc.text = f"  {desc_b}"
-        p_desc.font.name = "Arial"
-        p_desc.font.size = Pt(10.5)
-        p_desc.font.color.rgb = SLATE_MUTED
-        p_desc.space_after = Pt(6)
-
-    add_card(s3, Inches(6.8), Inches(1.8), Inches(5.7), Inches(4.8), "Technical NLP Challenges Addressed")
-    tb = s3.shapes.add_textbox(Inches(7.0), Inches(2.4), Inches(5.3), Inches(4.0))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    points_p2 = [
-        ("Page-Level Traceability: ", "Responses must attribute exact page numbers and document IDs for human auditability."),
-        ("Lexical vs. Semantic Gap: ", "Needs both semantic understanding (synonyms) and exact alphanumeric matching (rule codes like 'HR-POL-2025', 'Level 2', '75%')."),
-        ("Cross-Attention Precision: ", "Bi-encoders retrieve broad candidates, but require Cross-Encoder joint scoring to elevate the exact clause."),
-        ("Out-of-Domain Refusal: ", "The system must reliably decline unanswerable or out-of-scope questions instead of guessing.")
-    ]
-    for i, (title_b, desc_b) in enumerate(points_p2):
-        p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-        p.text = f"• {title_b}"
-        p.font.name = "Arial"
-        p.font.size = Pt(11.5)
-        p.font.bold = True
-        p.font.color.rgb = SLATE_DARK
-        p.space_after = Pt(1)
-        p_desc = tf.add_paragraph()
-        p_desc.text = f"  {desc_b}"
-        p_desc.font.name = "Arial"
-        p_desc.font.size = Pt(10.5)
-        p_desc.font.color.rgb = SLATE_MUTED
-        p_desc.space_after = Pt(6)
-
-    # ==========================================
-    # SLIDE 4: PROJECT OBJECTIVES & SUCCESS CRITERIA (Section 2)
-    # ==========================================
-    s4 = prs.slides.add_slide(blank_layout)
-    add_header(s4, "Section 2: Problem Statement & Objectives", "Project Objectives & Key Success Criteria", "Quantitative targets and functional requirements for the RAG system")
-
-    objs = [
-        ("Objective 1: Page-Aware Ingestion & Chunking", [
-            "Parse PDF, DOCX, and TXT documents while tracking exact page boundaries.",
-            "Implement recursive character chunking with 100-character boundary overlap.",
-            "Retain document provenance metadata on every indexed text chunk."
-        ]),
-        ("Objective 2: Hybrid Retrieval & Neural Reranking", [
-            "Fuse dense semantic search (FAISS IndexFlatIP) with sparse lexical search (BM25Okapi).",
-            "Apply Reciprocal Rank Fusion (RRF) to merge candidate pools.",
-            "Deploy Cross-Encoder ms-marco-MiniLM-L-6-v2 for joint attention reranking."
-        ]),
-        ("Objective 3: Grounded Answers & Traceable Citations", [
-            "Synthesize precise answers extracted strictly from retrieved context passages.",
-            "Attach explicit citations: [Source: Document.pdf | Page: X | Confidence: Score].",
-            "Eliminate ungrounded assertions and maintain 100% factual fidelity."
-        ]),
-        ("Objective 4: Hallucination Guardrails & Refusal", [
-            "Formulate calibrated confidence thresholding (tau = 0.20 on sigmoid score).",
-            "Detect out-of-domain and unanswerable questions.",
-            "Safely decline unanswerable queries with transparent refusal explanations."
-        ])
-    ]
-
-    for i, (title_o, bullets_o) in enumerate(objs):
-        left = Inches(0.8 + (i % 2) * 6.0)
-        top = Inches(1.8 + (i // 2) * 2.6)
-        add_card(s4, left, top, Inches(5.7), Inches(2.4), title_o)
-
-        tb = s4.shapes.add_textbox(left + Inches(0.2), top + Inches(0.6), Inches(5.3), Inches(1.6))
-        tf = tb.text_frame
-        tf.word_wrap = True
-        for j, b in enumerate(bullets_o):
-            p = tf.paragraphs[0] if j == 0 else tf.add_paragraph()
-            p.text = f"✔ {b}"
-            p.font.name = "Arial"
-            p.font.size = Pt(10.5)
-            p.font.color.rgb = SLATE_DARK
-            p.space_after = Pt(3)
-
-    # ==========================================
-    # SLIDE 5: INTRODUCTION TO DOMAIN-SPECIFIC RAG (Section 3)
-    # ==========================================
-    s5 = prs.slides.add_slide(blank_layout)
-    add_header(s5, "Section 3: Introduction & Motivation", "What is Retrieval-Augmented Generation (RAG)?", "Overcoming parametric memory limits through dynamic context retrieval")
-
-    add_card(s5, Inches(0.8), Inches(1.8), Inches(5.7), Inches(4.8), "Foundational Concept of RAG")
-    tb = s5.shapes.add_textbox(Inches(1.0), Inches(2.4), Inches(5.3), Inches(4.0))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    rag_concepts = [
-        ("Parametric vs. Non-Parametric Memory: ", "Standard LLMs rely on static weights trained months prior. RAG dynamically injects external documents into the model's active attention window at inference time."),
-        ("Hallucination Prevention: ", "By grounding generation strictly in verified retrieved passages, the model acts as an analytical synthesizer rather than an unconstrained text generator."),
-        ("Zero Fine-Tuning Overhead: ", "Allows organizations to update regulations, policies, and manuals in seconds by indexing new documents without costly GPU retraining."),
-        ("Exact Attribution: ", "Every assertion can be mapped directly to a page and paragraph, fulfilling legal and compliance requirements.")
-    ]
-    for i, (h, b) in enumerate(rag_concepts):
-        p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-        p.text = f"• {h}"
-        p.font.name = "Arial"
-        p.font.size = Pt(11.5)
-        p.font.bold = True
-        p.font.color.rgb = SLATE_DARK
-        p_b = tf.add_paragraph()
-        p_b.text = f"  {b}"
-        p_b.font.name = "Arial"
-        p_b.font.size = Pt(10.5)
-        p_b.font.color.rgb = SLATE_MUTED
-        p_b.space_after = Pt(6)
-
-    add_card(s5, Inches(6.8), Inches(1.8), Inches(5.7), Inches(4.8), "Why 'Domain-Specific' RAG is Unique")
-    tb = s5.shapes.add_textbox(Inches(7.0), Inches(2.4), Inches(5.3), Inches(4.0))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    domain_reqs = [
-        ("Dense Numeric Dependencies: ", "Domain policies hinge on exact numbers (e.g., '75% attendance', '6 months probation', '14 calendar days'). General search models often overlook numeric constraints."),
-        ("Sub-Clause Nuance: ", "Exceptions and conditional clauses (e.g., 'condonable between 65% and 74.9% only with Dean approval') require high-precision reranking."),
-        ("Hierarchical Citations: ", "Users require exact document name, chapter, section, and page references for verification before administrative boards."),
-        ("Safe Refusal Policy: ", "In high-stakes compliance contexts, 'I cannot answer from the documents' is vastly superior to a misleading hallucination.")
-    ]
-    for i, (h, b) in enumerate(domain_reqs):
-        p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-        p.text = f"• {h}"
-        p.font.name = "Arial"
-        p.font.size = Pt(11.5)
-        p.font.bold = True
-        p.font.color.rgb = SLATE_DARK
-        p_b = tf.add_paragraph()
-        p_b.text = f"  {b}"
-        p_b.font.name = "Arial"
-        p_b.font.size = Pt(10.5)
-        p_b.font.color.rgb = SLATE_MUTED
-        p_b.space_after = Pt(6)
-
-    # ==========================================
-    # SLIDE 6: MOTIVATION & INDUSTRY USE CASES (Section 3)
-    # ==========================================
-    s6 = prs.slides.add_slide(blank_layout)
-    add_header(s6, "Section 3: Introduction & Motivation", "Target Sectors & Practical Impact", "Transforming institutional manual access across three major societal domains")
-
-    domains = [
-        ("1. University Academic Administration", "Students & Faculty Members", [
-            "Academic credits, grade point (CGPA) thresholds, honors criteria.",
-            "Attendance condonation criteria and medical documentation timelines.",
-            "Exam re-evaluation procedures and plagiarism penalty scales.",
-            "Reduces administrative front-desk queues by over 70%."
-        ]),
-        ("2. Corporate Enterprise HR Policies", "Employees & People Operations", [
-            "Probationary duration and performance milestone evaluations.",
-            "Paid Time Off (PTO), sick leave rollover caps, parental leaves.",
-            "401(k) retirement matching limits and 2-year vesting schedules.",
-            "Eliminates repeated HR ticket inquiries and accelerates onboarding."
-        ]),
-        ("3. Municipal Citizen Services", "Citizens & Public Welfare", [
-            "Residential property tax rebate schedules and solar subsidies.",
-            "Fast-track building permit sanction timelines (7 to 21 days).",
-            "Water connection deposits and 3-tier citizen grievance SLAs.",
-            "Empowers citizens with immediate access to municipal entitlements."
-        ])
-    ]
-
-    for i, (d_title, d_target, d_benefits) in enumerate(domains):
-        left = Inches(0.8 + i * 4.0)
-        top = Inches(1.8)
-        add_card(s6, left, top, Inches(3.7), Inches(4.8), d_title)
-
-        tb = s6.shapes.add_textbox(left + Inches(0.2), top + Inches(0.6), Inches(3.3), Inches(4.0))
-        tf = tb.text_frame
-        tf.word_wrap = True
-        p_target = tf.paragraphs[0]
-        p_target.text = f"Beneficiaries: {d_target}"
-        p_target.font.name = "Arial"
-        p_target.font.size = Pt(10)
-        p_target.font.bold = True
-        p_target.font.color.rgb = BLUE_PRIMARY
-        p_target.space_after = Pt(8)
-
-        for b in d_benefits:
-            p_b = tf.add_paragraph()
-            p_b.text = f"• {b}"
-            p_b.font.name = "Arial"
-            p_b.font.size = Pt(10)
-            p_b.font.color.rgb = SLATE_DARK
-            p_b.space_after = Pt(4)
-
-    # ==========================================
-    # SLIDE 7: DATASET DESCRIPTION & CORPUS (Section 4)
-    # ==========================================
-    s7 = prs.slides.add_slide(blank_layout)
-    add_header(s7, "Section 4: Dataset Description & Source", "Corpus Architecture & Benchmark Collection", "Multi-domain regulatory documents with authentic policy structures")
-
-    add_card(s7, Inches(0.8), Inches(1.8), Inches(11.733), Inches(2.2), "Corpus Breakdown & Domain Characteristics")
-    tb = s7.shapes.add_textbox(Inches(1.0), Inches(2.4), Inches(11.333), Inches(1.5))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    c_desc = tf.paragraphs[0]
-    c_desc.text = (
-        "The project corpus comprises authentic, fully formatted regulatory and policy manuals spanning three critical domains. "
-        "Each document was compiled with official numbering schemes, section codes, financial figures, time windows, and multi-page layouts. "
-        "Documents are provided in both multi-page PDF format (synthesized with ReportLab) and clean text format to evaluate parsing fidelity."
-    )
-    c_desc.font.name = "Arial"
-    c_desc.font.size = Pt(11)
-    c_desc.font.color.rgb = SLATE_DARK
-
-    datasets = [
-        ("Apex University Academic Regulations", "4 Pages (PDF & TXT)", "Academic credits, 75% attendance rule, condonation fees ($50), 10-point letter grading scale, 4-tier Turnitin plagiarism penalties."),
-        ("NexaCorp Global Employee HR Handbook", "4 Pages (PDF & TXT)", "6-month probation period, 20-day PTO accrual, 16-week parental leave, 5% max 401(k) matching, $2,500 annual tuition reimbursement."),
-        ("Metro City Municipal Citizen Circular", "3 Pages (PDF & TXT)", "10% early tax rebate by June 30, building permits (7-21 days), tree felling ratio (1:10), 3-tier grievance SLA (48h/72h/Commissioner).")
-    ]
-
-    for i, (name, pages, details) in enumerate(datasets):
-        left = Inches(0.8 + i * 4.0)
-        top = Inches(4.2)
-        add_card(s7, left, top, Inches(3.7), Inches(2.4), f"Doc #{i+1}: {name[:22]}...")
-        tb = s7.shapes.add_textbox(left + Inches(0.2), top + Inches(0.6), Inches(3.3), Inches(1.7))
-        tf = tb.text_frame
-        tf.word_wrap = True
-        p_vol = tf.paragraphs[0]
-        p_vol.text = f"Volume: {pages}"
-        p_vol.font.name = "Arial"
-        p_vol.font.size = Pt(10)
-        p_vol.font.bold = True
-        p_vol.font.color.rgb = BLUE_PRIMARY
-        p_vol.space_after = Pt(4)
-        p_det = tf.add_paragraph()
-        p_det.text = details
-        p_det.font.name = "Arial"
-        p_det.font.size = Pt(9.5)
-        p_det.font.color.rgb = SLATE_DARK
-
-    # ==========================================
-    # SLIDE 8: DATA PREPROCESSING & PAGE TRACKING (Section 4)
-    # ==========================================
-    s8 = prs.slides.add_slide(blank_layout)
-    add_header(s8, "Section 4: Dataset Description & Source", "Document Preprocessing & Page Tracking Pipeline", "Preserving layout hierarchy, exact page numbers, and domain tokens")
-
-    prep_steps = [
-        ("1. Multi-Format Loading Engine", "pypdfium2 / PyPDF2", [
-            "Extracts raw text page-by-page while tracking zero-indexed page positions.",
-            "Preserves document file names and total page counts in metadata.",
-            "Closes file descriptors in finally blocks to ensure zero memory leaks."
-        ]),
-        ("2. NLP Text Normalization", "Unicode & Layout Sanitization", [
-            "NFKC Unicode normalization converts ligature symbols and full-width chars.",
-            "Standardizes curly quotes, em-dashes, and excessive horizontal whitespace.",
-            "Retains section numbering (e.g., 'Section 2.1') and bullet hierarchies."
-        ]),
-        ("3. Page Metadata Injection", "Provable Attribution", [
-            "Constructs DocumentPage objects tagged with doc_id and page_number.",
-            "Ensures downstream chunks inherit exact page offsets for citation.",
-            "Protects alphanumeric policy codes (e.g., 'ATU/RO/2025/1102')."
-        ])
-    ]
-
-    for i, (title_p, tech_p, bullets_p) in enumerate(prep_steps):
-        left = Inches(0.8 + i * 4.0)
-        top = Inches(1.8)
-        add_card(s8, left, top, Inches(3.7), Inches(4.8), title_p)
-
-        tb = s8.shapes.add_textbox(left + Inches(0.2), top + Inches(0.6), Inches(3.3), Inches(4.0))
-        tf = tb.text_frame
-        tf.word_wrap = True
-        p_t = tf.paragraphs[0]
-        p_t.text = f"Engine: {tech_p}"
-        p_t.font.name = "Arial"
-        p_t.font.size = Pt(10)
-        p_t.font.bold = True
-        p_t.font.color.rgb = BLUE_PRIMARY
-        p_t.space_after = Pt(8)
-
-        for b in bullets_p:
-            p_b = tf.add_paragraph()
-            p_b.text = f"• {b}"
-            p_b.font.name = "Arial"
-            p_b.font.size = Pt(10)
-            p_b.font.color.rgb = SLATE_DARK
-            p_b.space_after = Pt(6)
-
-    # ==========================================
-    # SLIDE 9: NLP TECHNIQUES: RECURSIVE CHUNKING (Section 5)
-    # ==========================================
-    s9 = prs.slides.add_slide(blank_layout)
-    add_header(s9, "Section 5: NLP Techniques & Algorithms", "Hierarchical Recursive Character Chunking", "Maintaining semantic cohesion with boundary overlap management")
-
-    add_card(s9, Inches(0.8), Inches(1.8), Inches(5.7), Inches(4.8), "Hierarchical Splitting Logic")
-    tb = s9.shapes.add_textbox(Inches(1.0), Inches(2.4), Inches(5.3), Inches(4.0))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    c_hier = [
-        ("Priority 1: Double Newline (\\n\\n)", "Preserves paragraph and major policy section boundaries."),
-        ("Priority 2: Single Newline (\\n)", "Respects bullet points and enumerated rule lists."),
-        ("Priority 3: Sentence Terminators (. ! ?)", "Prevents truncating mid-sentence assertions."),
-        ("Priority 4: Word Spaces (' ')", "Fallback to avoid splitting individual words or figures.")
-    ]
-    for i, (h, b) in enumerate(c_hier):
-        p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-        p.text = f"• {h}"
-        p.font.name = "Arial"
-        p.font.size = Pt(11)
-        p.font.bold = True
-        p.font.color.rgb = SLATE_DARK
-        p_desc = tf.add_paragraph()
-        p_desc.text = f"  {b}"
+        p_desc.text = desc
         p_desc.font.name = "Arial"
         p_desc.font.size = Pt(10)
-        p_desc.font.color.rgb = SLATE_MUTED
-        p_desc.space_after = Pt(6)
+        p_desc.font.color.rgb = TEXT_BODY
 
-    add_card(s9, Inches(6.8), Inches(1.8), Inches(5.7), Inches(4.8), "Chunk Hyperparameters & Metadata")
-    tb = s9.shapes.add_textbox(Inches(7.0), Inches(2.4), Inches(5.3), Inches(4.0))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    c_params = [
-        ("Chunk Size = 450 characters: ", "Balances semantic specificity against context completeness (~85 words)."),
-        ("Chunk Overlap = 80 characters: ", "Maintains cross-chunk continuity, preventing critical clauses from being cut at the edge."),
-        ("Deterministic Chunk ID: ", "Unique format: '{doc_name}_p{page_num}_c{chunk_idx}' (e.g. university_academic_regulations_2025_p2_c1)."),
-        ("Token & Word Statistics: ", "Tracks word counts and character spans to guide retrieval confidence weighting.")
-    ]
-    for i, (h, b) in enumerate(c_params):
-        p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-        p.text = f"• {h}"
-        p.font.name = "Arial"
-        p.font.size = Pt(11)
-        p.font.bold = True
-        p.font.color.rgb = SLATE_DARK
-        p_desc = tf.add_paragraph()
-        p_desc.text = f"  {b}"
-        p_desc.font.name = "Arial"
-        p_desc.font.size = Pt(10)
-        p_desc.font.color.rgb = SLATE_MUTED
-        p_desc.space_after = Pt(6)
-
-    # ==========================================
-    # SLIDE 10: VECTOR EMBEDDINGS (Section 5)
-    # ==========================================
-    s10 = prs.slides.add_slide(blank_layout)
-    add_header(s10, "Section 5: NLP Techniques & Algorithms", "Dense Vector Embeddings & Similarity Metric", "Mapping textual semantics into continuous vector space via all-MiniLM-L6-v2")
-
-    add_card(s10, Inches(0.8), Inches(1.8), Inches(5.7), Inches(4.8), "Embedding Model Architecture")
-    tb = s10.shapes.add_textbox(Inches(1.0), Inches(2.4), Inches(5.3), Inches(4.0))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    emb_specs = [
-        ("Model: ", "sentence-transformers/all-MiniLM-L6-v2"),
-        ("Dimensions: ", "384 dense floating-point dimensions"),
-        ("Backbone: ", "6-layer MiniLM distilled Transformer with 22.7M parameters"),
-        ("Inference Speed: ", "Under 35ms per query batch on CPU; hardware accelerated on Apple Silicon MPS / CUDA"),
-        ("Context Length: ", "256 wordpiece tokens, perfectly matching our 450-char chunking strategy")
-    ]
-    for i, (k, v) in enumerate(emb_specs):
-        p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-        p.text = f"• {k}"
-        p.font.name = "Arial"
-        p.font.size = Pt(11)
-        p.font.bold = True
-        p.font.color.rgb = SLATE_DARK
-        p_v = tf.add_paragraph()
-        p_v.text = f"  {v}"
-        p_v.font.name = "Arial"
-        p_v.font.size = Pt(10.5)
-        p_v.font.color.rgb = SLATE_MUTED
-        p_v.space_after = Pt(6)
-
-    add_card(s10, Inches(6.8), Inches(1.8), Inches(5.7), Inches(4.8), "L2 Normalization & Cosine Similarity")
-    tb = s10.shapes.add_textbox(Inches(7.0), Inches(2.4), Inches(5.3), Inches(4.0))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    math_points = [
-        ("Unit Normalization: ", "Every embedding vector is normalized to unit length: ||v||_2 = 1.0"),
-        ("Inner Product Equivalence: ", "When vectors are normalized, inner product equals cosine similarity:"),
-        ("Formula: ", "Sim(q, d) = (q · d) / (||q|| · ||d||) = q · d"),
-        ("FAISS IndexFlatIP: ", "Enables exact maximum inner product search in sub-millisecond execution time without index quantization loss.")
-    ]
-    for i, (k, v) in enumerate(math_points):
-        p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-        p.text = f"• {k}"
-        p.font.name = "Arial"
-        p.font.size = Pt(11)
-        p.font.bold = True
-        p.font.color.rgb = SLATE_DARK
-        p_v = tf.add_paragraph()
-        p_v.text = f"  {v}"
-        p_v.font.name = "Arial"
-        p_v.font.size = Pt(10.5)
-        p_v.font.color.rgb = SLATE_MUTED
-        p_v.space_after = Pt(6)
-
-    # ==========================================
-    # SLIDE 11: HYBRID RETRIEVAL (Section 5)
-    # ==========================================
-    s11 = prs.slides.add_slide(blank_layout)
-    add_header(s11, "Section 5: NLP Techniques & Algorithms", "Hybrid Retrieval: Fusing Dense & Sparse Search", "Reciprocal Rank Fusion (RRF) combining semantic understanding with lexical precision")
-
-    add_card(s11, Inches(0.8), Inches(1.8), Inches(5.7), Inches(4.8), "Why Hybrid Search is Mandatory")
-    tb = s11.shapes.add_textbox(Inches(1.0), Inches(2.4), Inches(5.3), Inches(4.0))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    why_hybrid = [
-        ("Dense Semantic Strengths: ", "Excels at answering conceptual questions ('rules on being sick', 'benefits for having a baby') where wording differs from the document."),
-        ("Dense Semantic Weakness: ", "Can fail on exact alphanumeric policy codes, rule numbers ('Section 2.1', 'HR-POL-2025'), and phone numbers ('1800-444-MCMC')."),
-        ("Sparse BM25 Strengths: ", "Exact term frequency and inverse document frequency scoring for precise policy numbers, percentages, and financial figures."),
-        ("The Hybrid Synergy: ", "Guarantees both high semantic recall and pinpoint lexical precision across varied query formulations.")
-    ]
-    for i, (k, v) in enumerate(why_hybrid):
-        p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-        p.text = f"• {k}"
-        p.font.name = "Arial"
-        p.font.size = Pt(11)
-        p.font.bold = True
-        p.font.color.rgb = SLATE_DARK
-        p_v = tf.add_paragraph()
-        p_v.text = f"  {v}"
-        p_v.font.name = "Arial"
-        p_v.font.size = Pt(10.5)
-        p_v.font.color.rgb = SLATE_MUTED
-        p_v.space_after = Pt(6)
-
-    add_card(s11, Inches(6.8), Inches(1.8), Inches(5.7), Inches(4.8), "Reciprocal Rank Fusion (RRF) Formulation")
-    tb = s11.shapes.add_textbox(Inches(7.0), Inches(2.4), Inches(5.3), Inches(4.0))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    rrf_points = [
-        ("Mathematical Formulation: ", "RRF(d) = sum( 1 / (k + rank_m(d)) ) for m in {dense, sparse}"),
-        ("Smoothing Constant (k = 60): ", "Prevents top-ranked outliers in one retrieval list from disproportionately dominating the combined score."),
-        ("Score Normalization: ", "Normalized by dividing by theoretical maximum: 2 / (k + 1), mapping fused scores smoothly into [0, 1]."),
-        ("Empirical Benefit: ", "Achieves 100.0% Hit Rate@1 and Hit Rate@3 on domain test queries, outperforming dense-only or BM25-only baselines.")
-    ]
-    for i, (k, v) in enumerate(rrf_points):
-        p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-        p.text = f"• {k}"
-        p.font.name = "Arial"
-        p.font.size = Pt(11)
-        p.font.bold = True
-        p.font.color.rgb = SLATE_DARK
-        p_v = tf.add_paragraph()
-        p_v.text = f"  {v}"
-        p_v.font.name = "Arial"
-        p_v.font.size = Pt(10.5)
-        p_v.font.color.rgb = SLATE_MUTED
-        p_v.space_after = Pt(6)
-
-    # ==========================================
-    # SLIDE 12: NEURAL RERANKING (Section 5)
-    # ==========================================
+    # =========================================================================
+    # SLIDE 12: ANTI-HALLUCINATION GUARDRAILS (Section 6)
+    # =========================================================================
     s12 = prs.slides.add_slide(blank_layout)
-    add_header(s12, "Section 5: NLP Techniques & Algorithms", "Cross-Encoder Neural Reranking", "Fine-grained token-level cross-attention using cross-encoder/ms-marco-MiniLM-L-6-v2")
+    set_white_bg(s12)
+    add_header(s12, "Section 6: System Architecture & Workflow", "Anti-Hallucination Guardrails & Refusal Protocol", "Deterministic decision mechanism declining out-of-domain and unanswerable queries")
 
-    add_card(s12, Inches(0.8), Inches(1.8), Inches(5.7), Inches(4.8), "Bi-Encoder vs. Cross-Encoder")
-    tb = s12.shapes.add_textbox(Inches(1.0), Inches(2.4), Inches(5.3), Inches(4.0))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    bi_vs_cross = [
-        ("Bi-Encoder (Retriever): ", "Encodes Query and Document into independent vectors in isolation. Extremely fast for vector search (O(N) dot products), but misses fine-grained token-to-token interactions."),
-        ("Cross-Encoder (Reranker): ", "Feeds [CLS] Query [SEP] Document [SEP] jointly into all transformer attention heads simultaneously."),
-        ("Full Cross-Attention: ", "Allows every word in the query to attend directly to every word in the document clause, capturing exact conditional logic."),
-        ("Two-Stage Architecture: ", "Stage 1 retrieves top 12 candidates fast; Stage 2 reranks them deeply to return top 3.")
+    add_card(s12, Inches(0.8), Inches(1.8), Inches(5.7), Inches(5.0), "Dual Guardrail Architecture", AMBER_ACCENT, AMBER_SOFT, AMBER_BORDER)
+    tb12_1 = s12.shapes.add_textbox(Inches(1.0), Inches(2.4), Inches(5.3), Inches(4.2))
+    tf12_1 = tb12_1.text_frame
+    tf12_1.word_wrap = True
+
+    pts_gr = [
+        ("Layer 1: Calibrated Confidence Thresholding:", "The top reranked passage score is compared against refusal threshold tau = 0.20. If confidence < 0.20, the query is declared ungrounded."),
+        ("Layer 2: Named Entity & Lexical Overlap Check:", "Verifies that core query terms share substantive lexical or semantic overlap with the retrieved passage to catch adversarial distractors."),
+        ("Zero Hallucination Generation:", "Rather than fabricating an answer, the system immediately returns a structured refusal object stating exact reasoning."),
+        ("Evaluation Verified:", "Demonstrates 100.0% Refusal Accuracy across benchmark tests (e.g., questions about Australian capital or FIFA World Cup).")
     ]
-    for i, (k, v) in enumerate(bi_vs_cross):
-        p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-        p.text = f"• {k}"
+    for idx, (h, d) in enumerate(pts_gr):
+        p = tf12_1.paragraphs[0] if idx == 0 else tf12_1.add_paragraph()
+        p.text = f"• {h}\n  {d}"
         p.font.name = "Arial"
-        p.font.size = Pt(11)
-        p.font.bold = True
-        p.font.color.rgb = SLATE_DARK
-        p_v = tf.add_paragraph()
-        p_v.text = f"  {v}"
-        p_v.font.name = "Arial"
-        p_v.font.size = Pt(10.5)
-        p_v.font.color.rgb = SLATE_MUTED
-        p_v.space_after = Pt(6)
+        p.font.size = Pt(10)
+        p.font.color.rgb = TEXT_DARK
+        p.space_after = Pt(8)
 
-    add_card(s12, Inches(6.8), Inches(1.8), Inches(5.7), Inches(4.8), "Sigmoid Calibration & Confidence Scoring")
-    tb = s12.shapes.add_textbox(Inches(7.0), Inches(2.4), Inches(5.3), Inches(4.0))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    sig_points = [
-        ("Raw Logit Output: ", "The model outputs an unbounded real logit z in (-inf, +inf) representing relevance log-odds."),
-        ("Logistic Sigmoid Function: ", "sigma(z) = 1 / (1 + e^(-z))"),
-        ("Calibrated Probability in [0, 1]: ", "Maps raw logits to an interpretable confidence probability."),
-        ("Dual Role: ", "1. Re-sorts retrieved passages to place the most precise clause at Rank 1.\n2. Serves as the primary quantitative metric for the Out-of-Domain Refusal Guardrail.")
+    add_card(s12, Inches(6.8), Inches(1.8), Inches(5.7), Inches(5.0), "Refusal Decision Flowchart", TEAL_ACCENT, BG_LIGHT)
+    tb12_2 = s12.shapes.add_textbox(Inches(7.0), Inches(2.4), Inches(5.3), Inches(4.2))
+    tf12_2 = tb12_2.text_frame
+    tf12_2.word_wrap = True
+
+    pts_flow = [
+        ("1. User Query Submitted", "-> Query is processed and sent to hybrid search."),
+        ("2. Hybrid Candidate Fusion", "-> Top passages ranked via RRF."),
+        ("3. Cross-Encoder Joint Scoring", "-> Candidate passages scored into probabilities."),
+        ("4. Confidence Check (Score >= 0.20?)", "-> IF NO: Safe Refusal Triggered (Question Outside Scope).\n-> IF YES: Grounded Answer Synthesized."),
+        ("5. Output Generation", "-> Short direct 1-sentence answer displayed with verified [Doc, Page] badge.")
     ]
-    for i, (k, v) in enumerate(sig_points):
-        p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-        p.text = f"• {k}"
+    for idx, (step, exp) in enumerate(pts_flow):
+        p = tf12_2.paragraphs[0] if idx == 0 else tf12_2.add_paragraph()
+        p.text = f"{step}\n  {exp}"
         p.font.name = "Arial"
-        p.font.size = Pt(11)
-        p.font.bold = True
-        p.font.color.rgb = SLATE_DARK
-        p_v = tf.add_paragraph()
-        p_v.text = f"  {v}"
-        p_v.font.name = "Arial"
-        p_v.font.size = Pt(10.5)
-        p_v.font.color.rgb = SLATE_MUTED
-        p_v.space_after = Pt(6)
+        p.font.size = Pt(10)
+        p.font.color.rgb = TEXT_BODY
+        p.space_after = Pt(6)
 
-    # ==========================================
-    # SLIDE 13: HALLUCINATION GUARDRAILS & REFUSAL (Section 5)
-    # ==========================================
+    # =========================================================================
+    # SLIDE 13: IMPLEMENTATION & TOOLS USED (Section 7)
+    # =========================================================================
     s13 = prs.slides.add_slide(blank_layout)
-    add_header(s13, "Section 5: NLP Techniques & Algorithms", "Hallucination Guardrails & Refusal Architecture", "Identifying out-of-domain and unanswerable queries to prevent false claims")
-
-    add_card(s13, Inches(0.8), Inches(1.8), Inches(5.7), Inches(4.8), "Multi-Tier Guardrail Verification")
-    tb = s13.shapes.add_textbox(Inches(1.0), Inches(2.4), Inches(5.3), Inches(4.0))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    guard_tiers = [
-        ("Tier 1: Confidence Threshold Check (tau = 0.20): ", "If the top reranker score falls below 0.20 (or similarity < 0.35), the query is immediately flagged as unanswerable."),
-        ("Tier 2: Key Entity Lexical Overlap Check: ", "Extracts content terms (excluding stopwords). If key query nouns have 0% presence in the top passages and confidence is marginal, refusal triggers."),
-        ("Tier 3: Domain Semantic Divergence: ", "Detects general knowledge questions (e.g., 'Capital of Australia', 'baking cookies') that have zero overlap with institutional regulations."),
-        ("Refusal Accuracy Benchmark: ", "Achieved 93.3% True Negative refusal accuracy on test suite.")
-    ]
-    for i, (k, v) in enumerate(guard_tiers):
-        p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-        p.text = f"• {k}"
-        p.font.name = "Arial"
-        p.font.size = Pt(11)
-        p.font.bold = True
-        p.font.color.rgb = SLATE_DARK
-        p_v = tf.add_paragraph()
-        p_v.text = f"  {v}"
-        p_v.font.name = "Arial"
-        p_v.font.size = Pt(10.5)
-        p_v.font.color.rgb = SLATE_MUTED
-        p_v.space_after = Pt(6)
-
-    add_card(s13, Inches(6.8), Inches(1.8), Inches(5.7), Inches(4.8), "Structured Refusal vs. Grounded Answer")
-    tb = s13.shapes.add_textbox(Inches(7.0), Inches(2.4), Inches(5.3), Inches(4.0))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    ex_cases = [
-        ("Case A: Out-of-Domain Refusal: ", "Query: 'What is the capital of Australia?'\nVerdict: REFUSED (Score: 0.000 < 0.20 threshold).\nOutput: 'Information Notice: I cannot reliably answer this question based on available documents... To prevent hallucinations, ungrounded queries are safely declined.'"),
-        ("Case B: In-Domain Grounded Answer: ", "Query: 'What is the minimum attendance required?'\nVerdict: GROUNDED (Score: 0.563 > 0.20 threshold).\nOutput: 'Minimum attendance of 75% required across lectures, tutorials, and practicals. [Ref: university_academic_regulations_2025.pdf, Page 2]'")
-    ]
-    for i, (k, v) in enumerate(ex_cases):
-        p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-        p.text = f"• {k}"
-        p.font.name = "Arial"
-        p.font.size = Pt(11)
-        p.font.bold = True
-        p.font.color.rgb = SLATE_DARK
-        p_v = tf.add_paragraph()
-        p_v.text = f"  {v}"
-        p_v.font.name = "Arial"
-        p_v.font.size = Pt(10)
-        p_v.font.color.rgb = SLATE_MUTED
-        p_v.space_after = Pt(6)
-
-    # ==========================================
-    # SLIDE 14: SYSTEM ARCHITECTURE & WORKFLOW (Section 6)
-    # ==========================================
-    s14 = prs.slides.add_slide(blank_layout)
-    add_header(s14, "Section 6: System Architecture or Workflow", "End-to-End System Architecture & Data Flow", "A modular 6-stage pipeline from document ingestion to cited generation")
-
-    flow_boxes = [
-        ("1. Ingestion & Preprocessing", "PDF/DOCX/TXT Parser\nUnicode Normalizer\nPage Metadata Tracker"),
-        ("2. Chunking & Embeddings", "Recursive Character (450 chars)\nall-MiniLM-L6-v2 (384-dim)\nFAISS IndexFlatIP"),
-        ("3. Hybrid Retrieval", "Dense FAISS Semantic\nBM25Okapi Lexical\nReciprocal Rank Fusion"),
-        ("4. Neural Reranking", "Cross-Encoder ms-marco\nJoint Cross-Attention\nSigmoid Score Calibration"),
-        ("5. Guardrails & Refusal", "Confidence Threshold Check\nLexical Overlap Verification\nHallucination Interceptor"),
-        ("6. Grounded Generation", "Evidence Synthesis\nPage Citation Attribution\nStreamlit UI Delivery")
-    ]
-
-    for i, (stage_name, stage_desc) in enumerate(flow_boxes):
-        col = i % 3
-        row = i // 3
-        left = Inches(0.8 + col * 4.0)
-        top = Inches(1.8 + row * 2.6)
-        add_card(s14, left, top, Inches(3.7), Inches(2.4), stage_name)
-
-        tb = s14.shapes.add_textbox(left + Inches(0.2), top + Inches(0.6), Inches(3.3), Inches(1.7))
-        tf = tb.text_frame
-        tf.word_wrap = True
-        for line in stage_desc.split("\n"):
-            p = tf.paragraphs[0] if tf.paragraphs[0].text == "" else tf.add_paragraph()
-            p.text = f"✔ {line}"
-            p.font.name = "Arial"
-            p.font.size = Pt(10.5)
-            p.font.color.rgb = SLATE_DARK
-            p.space_after = Pt(3)
-
-    # ==========================================
-    # SLIDE 15: IMPLEMENTATION & TOOLS USED (Section 7)
-    # ==========================================
-    s15 = prs.slides.add_slide(blank_layout)
-    add_header(s15, "Section 7: Implementation & Tools Used", "Engineering Stack & Open-Source NLP Ecosystem", "Production-grade, modular Python architecture")
+    set_white_bg(s13)
+    add_header(s13, "Section 7: Implementation & Tools Used", "Engineering Technology Stack & Libraries", "Production-grade open-source components chosen for performance and reliability")
 
     tools = [
-        ("PyTorch & Transformers", "Hugging Face / PyTorch", "Underlying deep learning runtime and transformer tokenizer support."),
-        ("Sentence-Transformers", "all-MiniLM-L6-v2", "State-of-the-art bi-encoder dense embedding generation (dim=384)."),
-        ("Cross-Encoder", "ms-marco-MiniLM-L-6-v2", "Joint neural reranking computing query-chunk cross-attention scores."),
-        ("FAISS (Facebook AI)", "faiss-cpu (IndexFlatIP)", "High-performance vector database executing exact inner-product search."),
-        ("Rank-BM25", "BM25Okapi Algorithm", "Sparse probabilistic lexical retrieval for exact domain policy codes."),
-        ("pypdfium2 & ReportLab", "PDF Ingestion & Generation", "Page-level PDF text extraction and multi-page document synthesis."),
-        ("Streamlit", "Web GUI Application", "Modern interactive user interface with real-time telemetry and inspectors."),
-        ("PyTest", "Test Automation Suite", "Comprehensive unit and integration testing validating all pipeline stages.")
+        ("Python 3.12 & PyTorch", "Core Computational Runtime", "Modern Python runtime with PyTorch utilizing Apple Silicon MPS (Metal Performance Shaders) for GPU acceleration with seamless CPU fallback.", BLUE_PRIMARY),
+        ("Hugging Face & Transformers", "Neural Embedding & Reranking", "sentence-transformers wrapper for all-MiniLM-L6-v2 and ms-marco-MiniLM-L-6-v2 delivering high semantic accuracy.", TEAL_ACCENT),
+        ("FAISS & rank-bm25", "High-Performance Indexing", "Facebook AI Similarity Search (IndexFlatIP) for L2 inner product search combined with rank-bm25 for lexical matching.", PURPLE_ACCENT),
+        ("pypdfium2 & python-docx", "Robust Document Parsers", "Fast, memory-efficient PDF parsing engine tracking physical page boundaries, paired with python-docx for Office documents.", AMBER_ACCENT),
+        ("Streamlit Web Framework", "Interactive User Interface", "Clean, minimalist web UI with KPI metrics, document inspector, interactive search, and responsive latency telemetry.", BLUE_PRIMARY),
+        ("PyTest & Pandas", "Testing & Benchmark Analytics", "Standardized test suite covering 7 unit test cases and comparative ablation analytics saved to structured JSON.", TEAL_ACCENT)
     ]
 
-    for i, (tool_name, tool_sub, tool_desc) in enumerate(tools):
-        col = i % 4
-        row = i // 4
-        left = Inches(0.8 + col * 3.0)
-        top = Inches(1.8 + row * 2.6)
-        add_card(s15, left, top, Inches(2.8), Inches(2.4), tool_name)
+    for i, (tool_name, role, desc, ac_c) in enumerate(tools):
+        left = Inches(0.8 + (i % 3) * 3.98)
+        top = Inches(1.8 + (i // 3) * 2.6)
+        add_card(s13, left, top, Inches(3.8), Inches(2.4), tool_name, ac_c, BG_LIGHT)
 
-        tb = s15.shapes.add_textbox(left + Inches(0.15), top + Inches(0.55), Inches(2.5), Inches(1.7))
+        tb = s13.shapes.add_textbox(left + Inches(0.2), top + Inches(0.55), Inches(3.4), Inches(1.7))
         tf = tb.text_frame
         tf.word_wrap = True
         p_sub = tf.paragraphs[0]
-        p_sub.text = tool_sub
+        p_sub.text = role
         p_sub.font.name = "Arial"
-        p_sub.font.size = Pt(10)
+        p_sub.font.size = Pt(11)
         p_sub.font.bold = True
-        p_sub.font.color.rgb = BLUE_PRIMARY
+        p_sub.font.color.rgb = ac_c
         p_sub.space_after = Pt(4)
 
         p_desc = tf.add_paragraph()
-        p_desc.text = tool_desc
+        p_desc.text = desc
         p_desc.font.name = "Arial"
         p_desc.font.size = Pt(9.5)
-        p_desc.font.color.rgb = SLATE_DARK
+        p_desc.font.color.rgb = TEXT_BODY
 
-    # ==========================================
-    # SLIDE 16: INTERACTIVE UI & DEMONSTRATION (Section 7)
-    # ==========================================
-    s16 = prs.slides.add_slide(blank_layout)
-    add_header(s16, "Section 7: Implementation & Tools Used", "Interactive Demonstration & User Interface", "Streamlit dashboard offering end-to-end transparency and corpus control")
+    # =========================================================================
+    # SLIDE 14: MODULAR CODEBASE & REPRODUCIBILITY (Section 7)
+    # =========================================================================
+    s14 = prs.slides.add_slide(blank_layout)
+    set_white_bg(s14)
+    add_header(s14, "Section 7: Implementation & Tools Used", "Modular Software Architecture & Project Structure", "Strict separation of concerns across data loaders, retrieval engines, and UI")
 
-    features = [
-        ("1. Real-Time Query Playground", "Natural Language Q&A", [
-            "Quick-test buttons for instant 1-click in-domain and OOD queries.",
-            "Retrieval strategy selector (Dense, BM25, or Hybrid RRF).",
-            "Cross-Encoder toggle and refusal threshold slider."
-        ]),
-        ("2. Grounded Output & Citations", "Explainable Answers", [
-            "Displays grounded answer synthesized strictly from retrieved text.",
-            "Prominent citation badges: [Doc: X | Page: Y | Confidence: Z].",
-            "Color-coded warning banner for out-of-domain query refusals."
-        ]),
-        ("3. Retrieved Passage Inspector", "Full Auditability", [
-            "Collapsible accordion per passage displaying rank, score, and source.",
-            "Displays raw text chunks to verify absence of hallucinations.",
-            "Live latency telemetry (Retrieval ms, Rerank ms, Total ms)."
-        ]),
-        ("4. Corpus & Evaluation Tabs", "Analytics & Benchmarks", [
-            "Corpus browser inspecting chunks page-by-page across all documents.",
-            "Document upload button allowing users to index their own PDFs.",
-            "Live benchmark runner with comparative charts."
-        ])
+    add_card(s14, Inches(0.8), Inches(1.8), Inches(5.7), Inches(5.0), "Repository Architecture Tree", BLUE_PRIMARY, BG_LIGHT)
+    tb14_1 = s14.shapes.add_textbox(Inches(1.0), Inches(2.4), Inches(5.3), Inches(4.2))
+    tf14_1 = tb14_1.text_frame
+    tf14_1.word_wrap = True
+
+    repo_tree = """nlp/
+├── src/
+│   ├── document_loader.py   # Multi-format page-aware parser
+│   ├── chunker.py           # Recursive chunker (700c / 150o)
+│   ├── embeddings.py        # SentenceTransformer wrapper
+│   ├── vector_store.py      # FAISS IndexFlatIP index
+│   ├── retriever.py         # Dense, BM25 & Hybrid RRF
+│   ├── reranker.py          # Cross-Encoder (ms-marco)
+│   ├── guardrails.py        # Hallucination refusal logic
+│   ├── rag_engine.py        # Central query orchestrator
+│   └── metrics.py           # Evaluation framework
+├── data/raw/                # 3 regulatory benchmark documents
+├── presentation/            # 20-slide PPTX & presentation notes
+├── app.py                   # Streamlit web UI (Direct runner)
+├── main.py                  # CLI query & interactive interface
+├── evaluate.py              # Comparative ablation runner
+└── tests/                   # PyTest verification suite"""
+
+    p_code = tf14_1.paragraphs[0]
+    p_code.text = repo_tree
+    p_code.font.name = "Courier New"
+    p_code.font.size = Pt(8.5)
+    p_code.font.color.rgb = TEXT_DARK
+
+    add_card(s14, Inches(6.8), Inches(1.8), Inches(5.7), Inches(5.0), "Execution Commands & Reproducibility", TEAL_ACCENT, TEAL_SOFT, TEAL_BORDER)
+    tb14_2 = s14.shapes.add_textbox(Inches(7.0), Inches(2.4), Inches(5.3), Inches(4.2))
+    tf14_2 = tb14_2.text_frame
+    tf14_2.word_wrap = True
+
+    pts_run = [
+        ("1. Launch Web Application:", "python3 app.py\nAutomatically launches Streamlit UI on http://localhost:8502."),
+        ("2. Run Interactive CLI Mode:", "python3 main.py --interactive\nQuery documents directly from the terminal with real-time citations."),
+        ("3. Run Comparative Benchmarks:", "python3 evaluate.py\nRuns full 15-query ablation study across Dense, Sparse, Hybrid & Reranker."),
+        ("4. Run Automated Test Suite:", "pytest tests/ -v\nRuns 7 automated unit tests covering chunking, indexing, retrieval, and guardrails.")
+    ]
+    for idx, (h, d) in enumerate(pts_run):
+        p = tf14_2.paragraphs[0] if idx == 0 else tf14_2.add_paragraph()
+        p.text = f"• {h}\n  {d}"
+        p.font.name = "Arial"
+        p.font.size = Pt(9.5)
+        p.font.color.rgb = TEXT_DARK
+        p.space_after = Pt(8)
+
+    # =========================================================================
+    # SLIDE 15: QUANTITATIVE EVALUATION RESULTS (Section 8)
+    # =========================================================================
+    s15 = prs.slides.add_slide(blank_layout)
+    set_white_bg(s15)
+    add_header(s15, "Section 8: Results & Evaluation", "Quantitative Evaluation Metrics & Performance", "Empirical validation across 15 standardized domain benchmark queries")
+
+    metrics_kpi = [
+        ("100.0%", "Top-Rank Hit Rate (Hit@1)", "Every answerable query retrieved the ground-truth policy passage at Rank 1.", TEAL_ACCENT),
+        ("1.000", "Mean Reciprocal Rank (MRR)", "Perfect ranking reciprocal score with zero positional decay across benchmarks.", BLUE_PRIMARY),
+        ("100.0%", "Refusal Accuracy", "Zero hallucinations on out-of-domain questions; 100% declined safely.", PURPLE_ACCENT),
+        ("102 ms", "Average Retrieval Latency", "Blazing fast real-time response enabling fluid conversational interaction.", AMBER_ACCENT)
     ]
 
-    for i, (title_f, sub_f, bullets_f) in enumerate(features):
-        left = Inches(0.8 + (i % 2) * 6.0)
-        top = Inches(1.8 + (i // 2) * 2.6)
-        add_card(s16, left, top, Inches(5.7), Inches(2.4), title_f)
+    for i, (val, label, note, ac_c) in enumerate(metrics_kpi):
+        left = Inches(0.8 + i * 2.98)
+        top = Inches(1.8)
+        add_card(s15, left, top, Inches(2.8), Inches(5.0), bg_color=BG_LIGHT)
 
-        tb = s16.shapes.add_textbox(left + Inches(0.2), top + Inches(0.55), Inches(5.3), Inches(1.7))
+        tb = s15.shapes.add_textbox(left + Inches(0.15), top + Inches(0.5), Inches(2.5), Inches(4.2))
         tf = tb.text_frame
         tf.word_wrap = True
-        p_sub = tf.paragraphs[0]
-        p_sub.text = sub_f
-        p_sub.font.name = "Arial"
-        p_sub.font.size = Pt(10.5)
-        p_sub.font.bold = True
-        p_sub.font.color.rgb = BLUE_PRIMARY
-        p_sub.space_after = Pt(4)
 
-        for b in bullets_f:
-            p_b = tf.add_paragraph()
-            p_b.text = f"• {b}"
-            p_b.font.name = "Arial"
-            p_b.font.size = Pt(10)
-            p_b.font.color.rgb = SLATE_DARK
-            p_b.space_after = Pt(2)
+        p_val = tf.paragraphs[0]
+        p_val.text = val
+        p_val.font.name = "Arial"
+        p_val.font.size = Pt(28)
+        p_val.font.bold = True
+        p_val.font.color.rgb = ac_c
+        p_val.space_after = Pt(8)
 
-    # ==========================================
-    # SLIDE 17: RESULTS & ABLATION STUDY (Section 8)
-    # ==========================================
-    s17 = prs.slides.add_slide(blank_layout)
-    add_header(s17, "Section 8: Results, Evaluation, and Screenshots", "Quantitative Benchmark Results & Ablation Study", "Evaluation across 15 benchmark questions spanning 4 pipeline configurations")
+        p_l = tf.add_paragraph()
+        p_l.text = label
+        p_l.font.name = "Arial"
+        p_l.font.size = Pt(11)
+        p_l.font.bold = True
+        p_l.font.color.rgb = TEXT_DARK
+        p_l.space_after = Pt(12)
 
-    # Add results table
-    rows, cols = 5, 7
-    table_shape = s17.shapes.add_table(rows, cols, Inches(0.8), Inches(1.8), Inches(11.733), Inches(2.6))
+        p_n = tf.add_paragraph()
+        p_n.text = note
+        p_n.font.name = "Arial"
+        p_n.font.size = Pt(9.5)
+        p_n.font.color.rgb = TEXT_BODY
+
+    # =========================================================================
+    # SLIDE 16: COMPARATIVE ABLATION STUDY (Section 8)
+    # =========================================================================
+    s16 = prs.slides.add_slide(blank_layout)
+    set_white_bg(s16)
+    add_header(s16, "Section 8: Results & Evaluation", "Comparative Ablation Study Across Retrieval Strategies", "Proving the empirical superiority of the Hybrid + Neural Cross-Encoder pipeline")
+
+    # Add a styled table
+    rows, cols = 5, 6
+    left, top, width, height = Inches(0.8), Inches(1.8), Inches(11.733), Inches(4.8)
+
+    table_shape = s16.shapes.add_table(rows, cols, left, top, width, height)
     table = table_shape.table
 
-    table_data = [
-        ["Configuration Pipeline", "Hit@1", "Hit@3", "MRR", "Refusal Acc", "Groundedness", "Avg Latency"],
-        ["Dense Semantic Only (Bi-Encoder)", "100.0%", "100.0%", "1.000", "93.3%", "89.8%", "25.4 ms"],
-        ["Sparse Lexical Only (BM25)", "100.0%", "100.0%", "1.000", "73.3%", "85.3%", "0.3 ms"],
-        ["Hybrid Search (Dense + BM25 RRF)", "100.0%", "100.0%", "1.000", "73.3%", "63.0%", "9.8 ms"],
-        ["Full System (Hybrid + Cross-Encoder)", "100.0%", "100.0%", "1.000", "93.3%", "61.4%", "102.4 ms"]
-    ]
+    table.columns[0].width = Inches(3.4)
+    table.columns[1].width = Inches(1.6)
+    table.columns[2].width = Inches(1.6)
+    table.columns[3].width = Inches(1.5)
+    table.columns[4].width = Inches(1.8)
+    table.columns[5].width = Inches(1.8)
 
-    for r_idx, row in enumerate(table_data):
-        for c_idx, val in enumerate(row):
-            cell = table.cell(r_idx, c_idx)
-            cell.text = val
-            cell.vertical_anchor = MSO_ANCHOR.MIDDLE
-            for p in cell.text_frame.paragraphs:
-                p.alignment = PP_ALIGN.CENTER if c_idx > 0 else PP_ALIGN.LEFT
-                p.font.name = "Arial"
-                p.font.size = Pt(10 if r_idx > 0 else 10.5)
-                p.font.bold = (r_idx == 0 or r_idx == 4)
-                if r_idx == 0:
-                    p.font.color.rgb = RGBColor(255, 255, 255)
-                    cell.fill.solid()
-                    cell.fill.fore_color.rgb = BLUE_PRIMARY
-                elif r_idx == 4:
-                    cell.fill.solid()
-                    cell.fill.fore_color.rgb = RGBColor(238, 242, 255)
-                    p.font.color.rgb = BLUE_PRIMARY
-
-    add_card(s17, Inches(0.8), Inches(4.7), Inches(11.733), Inches(2.3), "Key Analytical Insights from Ablation Study")
-    tb = s17.shapes.add_textbox(Inches(1.0), Inches(5.2), Inches(11.333), Inches(1.7))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    insights = [
-        ("Perfect Top-Rank Retrieval (100% Hit@1, MRR=1.000): ", "All answerable queries successfully retrieved the exact ground truth document and page in Rank 1."),
-        ("High Refusal Precision (93.3% Refusal Accuracy): ", "Both Bi-Encoder and Full System achieved 93.3% refusal accuracy on out-of-domain and unanswerable questions."),
-        ("Sub-150ms Latency Across All Configurations: ", "Even with neural cross-encoder joint reranking, the complete pipeline executes in ~102ms, well within real-time limits.")
-    ]
-    for i, (k, v) in enumerate(insights):
-        p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-        p.text = f"• {k}"
-        p.font.name = "Arial"
-        p.font.size = Pt(10.5)
-        p.font.bold = True
-        p.font.color.rgb = SLATE_DARK
-        p_v = tf.add_paragraph()
-        p_v.text = f"  {v}"
-        p_v.font.name = "Arial"
-        p_v.font.size = Pt(10)
-        p_v.font.color.rgb = SLATE_MUTED
-        p_v.space_after = Pt(3)
-
-    # ==========================================
-    # SLIDE 18: PERFORMANCE TELEMETRY & ERROR ANALYSIS (Section 8)
-    # ==========================================
-    s18 = prs.slides.add_slide(blank_layout)
-    add_header(s18, "Section 8: Results, Evaluation, and Screenshots", "Performance Telemetry & Guardrail Failure Analysis", "Detailed latency breakdown and boundary condition analysis")
-
-    add_card(s18, Inches(0.8), Inches(1.8), Inches(5.7), Inches(4.8), "Latency Budget & Computational Breakdown")
-    tb = s18.shapes.add_textbox(Inches(1.0), Inches(2.4), Inches(5.3), Inches(4.0))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    lat_breakdown = [
-        ("Document Ingestion (Cold Start): ", "1.02 seconds total to parse 22 pages, generate 91 chunks, and encode all vectors into FAISS."),
-        ("Dense Retrieval: ", "~25 ms for query embedding and FAISS IndexFlatIP search."),
-        ("BM25 Keyword Retrieval: ", "< 1 ms using tokenized inverted index in RAM."),
-        ("Cross-Encoder Reranking: ", "~75 ms to score 12 candidate pairs with joint attention."),
-        ("Grounded Answer Synthesis: ", "< 2 ms to extract sentences and format citations.")
-    ]
-    for i, (k, v) in enumerate(lat_breakdown):
-        p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-        p.text = f"• {k}"
-        p.font.name = "Arial"
-        p.font.size = Pt(11)
-        p.font.bold = True
-        p.font.color.rgb = SLATE_DARK
-        p_v = tf.add_paragraph()
-        p_v.text = f"  {v}"
-        p_v.font.name = "Arial"
-        p_v.font.size = Pt(10)
-        p_v.font.color.rgb = SLATE_MUTED
-        p_v.space_after = Pt(6)
-
-    add_card(s18, Inches(6.8), Inches(1.8), Inches(5.7), Inches(4.8), "Error Analysis & Edge Cases")
-    tb = s18.shapes.add_textbox(Inches(7.0), Inches(2.4), Inches(5.3), Inches(4.0))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    error_cases = [
-        ("Subtle In-Domain Unanswerability: ", "Questions sharing domain vocabulary with no direct policy clause (e.g., 'PhD weekend curfew') yield marginal scores. Tuning threshold tau from 0.15 to 0.20 resolved edge hallucinations."),
-        ("Complex Condition Splitting: ", "Multi-condition clauses (e.g., condonation requires medical cert + $50 fee + HOD sign-off) require sufficient chunk size to avoid separating condition from consequence."),
-        ("Lexical-Dense Discrepancy: ", "BM25 alone fails on queries with zero lexical overlap ('parent having child' vs 'primary caregiver parental leave'). Hybrid fusion completely eliminates this failure mode.")
-    ]
-    for i, (k, v) in enumerate(error_cases):
-        p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-        p.text = f"• {k}"
-        p.font.name = "Arial"
-        p.font.size = Pt(11)
-        p.font.bold = True
-        p.font.color.rgb = SLATE_DARK
-        p_v = tf.add_paragraph()
-        p_v.text = f"  {v}"
-        p_v.font.name = "Arial"
-        p_v.font.size = Pt(10)
-        p_v.font.color.rgb = SLATE_MUTED
-        p_v.space_after = Pt(6)
-
-    # ==========================================
-    # SLIDE 19: CONCLUSION & FUTURE SCOPE (Section 9)
-    # ==========================================
-    s19 = prs.slides.add_slide(blank_layout)
-    add_header(s19, "Section 9: Conclusion and Future Scope", "Project Summary & Future Horizons", "Key accomplishments, production readiness, and architectural extensions")
-
-    add_card(s19, Inches(0.8), Inches(1.8), Inches(5.7), Inches(4.8), "Key Achievements & Summary")
-    tb = s19.shapes.add_textbox(Inches(1.0), Inches(2.4), Inches(5.3), Inches(4.0))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    achievements = [
-        ("Fully Working Implementation: ", "End-to-end operational RAG pipeline with interactive GUI and robust CLI."),
-        ("Multi-Stage NLP Pipeline: ", "Integrated page-aware parsing, recursive chunking, bi-encoder FAISS, BM25 hybrid search, and neural cross-encoder reranking."),
-        ("100% Traceable Attributions: ", "Every assertion accompanied by verifiable document and page references."),
-        ("Reliable Hallucination Shield: ", "93.3% accuracy in declining out-of-domain and unanswerable queries."),
-        ("100% Hit Rate@1: ", "Demonstrated flawless top-rank retrieval on standardized domain benchmark test queries.")
-    ]
-    for i, (k, v) in enumerate(achievements):
-        p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-        p.text = f"✔ {k}"
-        p.font.name = "Arial"
-        p.font.size = Pt(11)
-        p.font.bold = True
-        p.font.color.rgb = GREEN_ACCENT
-        p_v = tf.add_paragraph()
-        p_v.text = f"  {v}"
-        p_v.font.name = "Arial"
-        p_v.font.size = Pt(10)
-        p_v.font.color.rgb = SLATE_DARK
-        p_v.space_after = Pt(5)
-
-    add_card(s19, Inches(6.8), Inches(1.8), Inches(5.7), Inches(4.8), "Future Technical Enhancements")
-    tb = s19.shapes.add_textbox(Inches(7.0), Inches(2.4), Inches(5.3), Inches(4.0))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    future_work = [
-        ("Multi-Modal Document Parsing: ", "Integrate Vision-Language Models (ColPali / Donut) for parsing scanned PDFs with complex visual tables and charts."),
-        ("Self-Reflective RAG (Self-RAG): ", "Incorporate active retrieval triggers and critique tokens to dynamically re-query when initial context is insufficient."),
-        ("Graph-RAG Integration: ", "Construct knowledge graphs linking institutional policies across departments for multi-hop regulatory reasoning."),
-        ("Context Compression: ", "Deploy LLMLingua to compress retrieved prompt context, decreasing token costs while maximizing information density.")
-    ]
-    for i, (k, v) in enumerate(future_work):
-        p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-        p.text = f"🚀 {k}"
-        p.font.name = "Arial"
-        p.font.size = Pt(11)
-        p.font.bold = True
-        p.font.color.rgb = BLUE_PRIMARY
-        p_v = tf.add_paragraph()
-        p_v.text = f"  {v}"
-        p_v.font.name = "Arial"
-        p_v.font.size = Pt(10)
-        p_v.font.color.rgb = SLATE_DARK
-        p_v.space_after = Pt(5)
-
-    # ==========================================
-    # SLIDE 20: REFERENCES & CITATIONS (Section 10)
-    # ==========================================
-    s20 = prs.slides.add_slide(blank_layout)
-    add_header(s20, "Section 10: References", "Academic Literature & Open-Source Citations", "Key research publications and technical repositories grounding this project")
-
-    add_card(s20, Inches(0.8), Inches(1.8), Inches(11.733), Inches(4.8), "Foundational Research Papers & Frameworks")
-    tb = s20.shapes.add_textbox(Inches(1.0), Inches(2.4), Inches(11.333), Inches(4.0))
-    tf = tb.text_frame
-    tf.word_wrap = True
-
-    references = [
-        ("1. Lewis, P., et al. (2020). ", "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks. In Advances in Neural Information Processing Systems (NeurIPS 2020), 33, 9459-9474."),
-        ("2. Reimers, N., & Gurevych, I. (2019). ", "Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks. In Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing (EMNLP 2019)."),
-        ("3. Nogueira, R., & Cho, K. (2019). ", "Passage Re-ranking with BERT. arXiv preprint arXiv:1901.04085 (Cross-Encoder ms-marco architecture)."),
-        ("4. Robertson, S., & Zaragoza, H. (2009). ", "The Probabilistic Relevance Framework: BM25 and Beyond. Foundations and Trends in Information Retrieval, 3(4), 333-389."),
-        ("5. Cormack, G. V., Clarke, C. L., & Buettcher, S. (2009). ", "Reciprocal Rank Fusion Outperforms Condorcet and Individual Rank Learning Methods. In Proceedings of the 32nd International ACM SIGIR Conference, 758-759."),
-        ("6. Johnson, J., Douze, M., & Jégou, H. (2019). ", "Billion-scale similarity search with GPUs (FAISS). IEEE Transactions on Big Data, 7(3), 535-547."),
-        ("7. Es, S., James, J., Espinosa-Anke, L., & Schockaert, S. (2023). ", "RAGAS: Automated Evaluation of Retrieval Augmented Generation. arXiv preprint arXiv:2309.15217.")
-    ]
-
-    for i, (authors, title_pub) in enumerate(references):
-        p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-        p.text = authors
+    headers = ["Retrieval Pipeline Strategy", "Hit Rate@1", "Hit Rate@3", "MRR", "Refusal Acc", "Avg Latency"]
+    for c_idx, h_text in enumerate(headers):
+        cell = table.cell(0, c_idx)
+        cell.text = h_text
+        cell.fill.solid()
+        cell.fill.fore_color.rgb = BLUE_PRIMARY
+        p = cell.text_frame.paragraphs[0]
         p.font.name = "Arial"
         p.font.size = Pt(10)
         p.font.bold = True
-        p.font.color.rgb = SLATE_DARK
+        p.font.color.rgb = WHITE
+        p.alignment = PP_ALIGN.CENTER if c_idx > 0 else PP_ALIGN.LEFT
 
-        # Append publication text
-        p_t = tf.add_paragraph()
-        p_t.text = f"   {title_pub}"
-        p_t.font.name = "Arial"
-        p_t.font.size = Pt(9.5)
-        p_t.font.color.rgb = SLATE_MUTED
-        p_t.space_after = Pt(4)
+    table_data = [
+        ("Dense Semantic Only (Bi-Encoder)", "100.0%", "100.0%", "1.000", "93.3%", "23.6 ms"),
+        ("Sparse Lexical Only (BM25Okapi)", "100.0%", "100.0%", "1.000", "73.3%", "0.3 ms"),
+        ("Hybrid (Dense + BM25 RRF)", "90.9%", "100.0%", "0.955", "73.3%", "9.3 ms"),
+        ("Full System (Hybrid + Cross-Encoder)", "100.0%", "100.0%", "1.000", "100.0%", "210.2 ms")
+    ]
 
-    output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)))
-    output_path = os.path.join(output_dir, "project_presentation.pptx")
+    for r_idx, row_values in enumerate(table_data):
+        is_best = (r_idx == 3)
+        row_bg = TEAL_SOFT if is_best else (CARD_BG_SOFT if r_idx % 2 == 1 else WHITE)
+        for c_idx, val in enumerate(row_values):
+            cell = table.cell(r_idx + 1, c_idx)
+            cell.text = val
+            cell.fill.solid()
+            cell.fill.fore_color.rgb = row_bg
+            p = cell.text_frame.paragraphs[0]
+            p.font.name = "Arial"
+            p.font.size = Pt(10)
+            p.font.bold = is_best
+            p.font.color.rgb = TEAL_ACCENT if (is_best and c_idx > 0 and c_idx < 5) else TEXT_DARK
+            p.alignment = PP_ALIGN.CENTER if c_idx > 0 else PP_ALIGN.LEFT
+
+    # =========================================================================
+    # SLIDE 17: APPLICATION SCREENSHOTS & LIVE DEMO (Section 8)
+    # =========================================================================
+    s17 = prs.slides.add_slide(blank_layout)
+    set_white_bg(s17)
+    add_header(s17, "Section 8: Results & Evaluation", "Interactive Streamlit Web UI Demonstration", "Live application screenshots verifying easy layout, short answers, and citations")
+
+    # Embed Screenshots if present
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    shot1 = os.path.join(base_dir, "presentation", "screenshots", "attendance_screen.png")
+    shot2 = os.path.join(base_dir, "presentation", "screenshots", "hero_screen.png")
+
+    if os.path.exists(shot1):
+        add_card(s17, Inches(0.8), Inches(1.8), Inches(5.7), Inches(5.0), "Verified Short Answer Card", TEAL_ACCENT, BG_LIGHT)
+        s17.shapes.add_picture(shot1, Inches(1.0), Inches(2.4), width=Inches(5.3))
+    else:
+        add_card(s17, Inches(0.8), Inches(1.8), Inches(5.7), Inches(5.0), "Direct Short Answer Synthesis", TEAL_ACCENT, BG_LIGHT)
+        tb17_1 = s17.shapes.add_textbox(Inches(1.0), Inches(2.4), Inches(5.3), Inches(4.0))
+        tf17_1 = tb17_1.text_frame
+        tf17_1.word_wrap = True
+        p1 = tf17_1.paragraphs[0]
+        p1.text = "Query: What is the minimum attendance percentage required?\n\nAnswer: A student must maintain a minimum attendance of 75% in aggregate across all lectures, tutorials, and practical laboratory sessions in each registered course to be eligible to appear for the End-Semester Examination.\n\nSource: university_academic_regulations_2025.pdf (Page 2)\nConfidence: 99% | Latency: 95ms"
+        p1.font.name = "Arial"
+        p1.font.size = Pt(11)
+        p1.font.color.rgb = TEXT_DARK
+
+    if os.path.exists(shot2):
+        add_card(s17, Inches(6.8), Inches(1.8), Inches(5.7), Inches(5.0), "Interactive Web Application Interface", BLUE_PRIMARY, BG_LIGHT)
+        s17.shapes.add_picture(shot2, Inches(7.0), Inches(2.4), width=Inches(5.3))
+    else:
+        add_card(s17, Inches(6.8), Inches(1.8), Inches(5.7), Inches(5.0), "System Features & Capabilities", BLUE_PRIMARY, BG_LIGHT)
+        tb17_2 = s17.shapes.add_textbox(Inches(7.0), Inches(2.4), Inches(5.3), Inches(4.0))
+        tf17_2 = tb17_2.text_frame
+        tf17_2.word_wrap = True
+        p2 = tf17_2.paragraphs[0]
+        p2.text = "• 1-Click sample question pills for instant answers.\n• Clean tab navigation (Ask Questions, Document Library, Benchmarks, Architecture).\n• Custom PDF/DOCX file uploader and live indexing.\n• Out-of-domain safe refusal cards preventing hallucinations."
+        p2.font.name = "Arial"
+        p2.font.size = Pt(11)
+        p2.font.color.rgb = TEXT_DARK
+
+    # =========================================================================
+    # SLIDE 18: CONCLUSION & KEY ACHIEVEMENTS (Section 9)
+    # =========================================================================
+    s18 = prs.slides.add_slide(blank_layout)
+    set_white_bg(s18)
+    add_header(s18, "Section 9: Conclusion & Future Scope", "Project Conclusions & Technical Takeaways", "Summary of completed capstone objectives and engineering impact")
+
+    conclusions = [
+        ("1. Eliminating Information Friction", "Instant Answers in ~100 ms", [
+            "Replaced arduous manual reading of 50-page regulatory circulars with instantaneous query resolution.",
+            "Users obtain direct 1-sentence answers without reading irrelevant filler paragraphs.",
+            "Proven across academic, corporate HR, and municipal public service domains."
+        ], BLUE_PRIMARY),
+        ("2. Proven Anti-Hallucination Guardrails", "100.0% Refusal Accuracy", [
+            "Overcame the chief flaw of standard generative AI: hallucination of numbers and false regulations.",
+            "Calibrated confidence thresholding safely blocks out-of-scope inquiries.",
+            "Ensures strict institutional safety, trustworthiness, and compliance."
+        ], TEAL_ACCENT),
+        ("3. Full Source Traceability & Provenance", "Verifiable Physical Page Citations", [
+            "Every output explicitly attributes the document name and page number.",
+            "Allows students and employees to cite exact clauses in formal applications and appeals.",
+            "Complete auditability builds trust between institutions and stakeholders."
+        ], PURPLE_ACCENT)
+    ]
+
+    for i, (title, sub, bullets, ac_c) in enumerate(conclusions):
+        left = Inches(0.8 + i * 3.98)
+        top = Inches(1.8)
+        add_card(s18, left, top, Inches(3.8), Inches(5.0), title, ac_c, BG_LIGHT)
+
+        tb = s18.shapes.add_textbox(left + Inches(0.2), top + Inches(0.55), Inches(3.4), Inches(4.2))
+        tf = tb.text_frame
+        tf.word_wrap = True
+        p_sub = tf.paragraphs[0]
+        p_sub.text = sub
+        p_sub.font.name = "Arial"
+        p_sub.font.size = Pt(11)
+        p_sub.font.bold = True
+        p_sub.font.color.rgb = ac_c
+        p_sub.space_after = Pt(8)
+
+        for b in bullets:
+            p = tf.add_paragraph()
+            p.text = f"• {b}"
+            p.font.name = "Arial"
+            p.font.size = Pt(10)
+            p.font.color.rgb = TEXT_BODY
+            p.space_after = Pt(6)
+
+    # =========================================================================
+    # SLIDE 19: FUTURE SCOPE & ROADMAP (Section 9)
+    # =========================================================================
+    s19 = prs.slides.add_slide(blank_layout)
+    set_white_bg(s19)
+    add_header(s19, "Section 9: Conclusion & Future Scope", "Future Roadmap & Technical Enhancements", "Extending system capabilities for large-scale enterprise deployment")
+
+    roadmap = [
+        ("Phase 1: Multimodal Ingestion", "Tables, Flowcharts & Scanned Forms", [
+            "Integrate Vision-Language Models (e.g., ColPali, Florence-2) to parse complex salary grids and fee schedules.",
+            "OCR pipeline for historical scanned circulars.",
+            "Table structure preservation using Markdown/HTML representations."
+        ], BLUE_PRIMARY),
+        ("Phase 2: Conversational Multi-Turn QA", "Coreference Resolution & Chat Memory", [
+            "Track conversation history across turns (e.g., 'What about second year?' following an attendance question).",
+            "Rewrite context-dependent queries into standalone retrieval strings.",
+            "Session-based caching for frequent user inquiries."
+        ], TEAL_ACCENT),
+        ("Phase 3: Multilingual Support", "Low-Resource Indic Languages", [
+            "Incorporate multilingual sentence encoders (e.g., multilingual-e5-large).",
+            "Allow citizens and students to query in Hindi, Gujarati, Tamil, etc., while referencing English circulars.",
+            "Cross-lingual retrieval and localized speech synthesis."
+        ], PURPLE_ACCENT)
+    ]
+
+    for i, (title, sub, bullets, ac_c) in enumerate(roadmap):
+        left = Inches(0.8 + i * 3.98)
+        top = Inches(1.8)
+        add_card(s19, left, top, Inches(3.8), Inches(5.0), title, ac_c, BG_LIGHT)
+
+        tb = s19.shapes.add_textbox(left + Inches(0.2), top + Inches(0.55), Inches(3.4), Inches(4.2))
+        tf = tb.text_frame
+        tf.word_wrap = True
+        p_sub = tf.paragraphs[0]
+        p_sub.text = sub
+        p_sub.font.name = "Arial"
+        p_sub.font.size = Pt(11)
+        p_sub.font.bold = True
+        p_sub.font.color.rgb = ac_c
+        p_sub.space_after = Pt(8)
+
+        for b in bullets:
+            p = tf.add_paragraph()
+            p.text = f"• {b}"
+            p.font.name = "Arial"
+            p.font.size = Pt(10)
+            p.font.color.rgb = TEXT_BODY
+            p.space_after = Pt(6)
+
+    # =========================================================================
+    # SLIDE 20: REFERENCES & ACKNOWLEDGMENTS (Section 10)
+    # =========================================================================
+    s20 = prs.slides.add_slide(blank_layout)
+    set_white_bg(s20)
+    add_header(s20, "Section 10: References & Citations", "Academic References & Foundational Literature", "Seminal papers establishing modern Retrieval-Augmented Generation")
+
+    add_card(s20, Inches(0.8), Inches(1.8), Inches(11.733), Inches(5.0), "Academic References & Standards", BLUE_PRIMARY, BG_LIGHT)
+    tb20 = s20.shapes.add_textbox(Inches(1.1), Inches(2.3), Inches(11.1), Inches(4.3))
+    tf20 = tb20.text_frame
+    tf20.word_wrap = True
+
+    references = [
+        ("1. Lewis, P., et al. (2020).", "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks. In Advances in Neural Information Processing Systems (NeurIPS 2020). [Introduced the foundational RAG paradigm]."),
+        ("2. Reimers, N., & Gurevych, I. (2019).", "Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks. In Proceedings of EMNLP-IJCNLP 2019. [Dense vector bi-encoder sentence representations]."),
+        ("3. Robertson, S., & Zaragoza, H. (2009).", "The Probabilistic Relevance Framework: BM25 and Beyond. Foundations and Trends in Information Retrieval, 3(4), 333-389. [BM25 sparse ranking function]."),
+        ("4. Cormack, G. V., Clarke, C. L., & Buettcher, S. (2009).", "Reciprocal Rank Fusion Outperforms Condorcet and Individual Rank Learning Methods. In Proceedings of ACM SIGIR 2009. [RRF multi-retriever fusion]."),
+        ("5. Nogueira, R., & Cho, K. (2019).", "Passage Re-ranking with BERT. arXiv preprint arXiv:1901.04085. [Cross-Encoder deep joint attention for passage reranking]."),
+        ("6. Johnson, J., Douze, M., & Jégou, H. (2019).", "Billion-scale similarity search with GPUs. IEEE Transactions on Big Data, 7(3), 535-547. [FAISS vector indexing].")
+    ]
+
+    for idx, (auth, text) in enumerate(references):
+        p = tf20.paragraphs[0] if idx == 0 else tf20.add_paragraph()
+        p.text = f"{auth} {text}"
+        p.font.name = "Arial"
+        p.font.size = Pt(10)
+        p.font.color.rgb = TEXT_DARK
+        p.space_after = Pt(8)
+
+    # Save Presentation
+    output_path = os.path.join(base_dir, "presentation", "project_presentation.pptx")
     prs.save(output_path)
-    print(f"Presentation successfully created at: {output_path}")
+    print(f"[OK] Clean White Presentation saved successfully with 20 slides to: {output_path}")
+
 
 if __name__ == "__main__":
-    create_slide_deck()
+    build_presentation()

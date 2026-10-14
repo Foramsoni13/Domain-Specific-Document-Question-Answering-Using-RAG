@@ -27,8 +27,8 @@ def run_evaluation_suite():
     # Ingest document corpus
     print("\n[1] Initializing RAG Engine and ingesting document corpus...")
     engine = RAGEngine(
-        chunk_size=450,
-        chunk_overlap=80,
+        chunk_size=700,
+        chunk_overlap=150,
         enable_reranking=True,
         rerank_threshold=0.20
     )

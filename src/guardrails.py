@@ -126,12 +126,9 @@ class RAGGuardrails:
 
     @staticmethod
     def generate_refusal_message(query: str, verdict: GuardrailVerdict) -> str:
-        """Constructs an articulate, grounded refusal explaining why the question cannot be answered."""
+        """Constructs a concise, direct refusal explaining that the answer is not in the documents."""
         return (
-            f"**Information Notice**: I cannot reliably answer this question based on the available documents.\n\n"
-            f"**Query**: *\"{query}\"*\n\n"
-            f"**Reason for Refusal**: {verdict.reason}\n\n"
-            f"**System Guardrail**: Grounded RAG policies require retrieved passages to exceed the verified confidence threshold "
-            f"(Confidence observed: `{verdict.confidence_score:.3f}`). "
-            f"To prevent hallucinations or misleading assumptions, ungrounded queries are safely declined."
+            f"**Not found in documents**: This question cannot be answered from the provided documents.\n\n"
+            f"**Reason**: {verdict.reason}\n\n"
+            f"*To prevent hallucinations, queries with low confidence ({verdict.confidence_score:.3f}) are safely declined.*"
         )

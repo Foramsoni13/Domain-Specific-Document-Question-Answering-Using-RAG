@@ -61,8 +61,8 @@ class RAGEngine:
 
     def __init__(
         self,
-        chunk_size: int = 450,
-        chunk_overlap: int = 80,
+        chunk_size: int = 700,
+        chunk_overlap: int = 150,
         embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2",
         reranker_model: str = "cross-encoder/ms-marco-MiniLM-L-6-v2",
         enable_reranking: bool = True,
@@ -229,10 +229,6 @@ class RAGEngine:
         and formats explicit document/page reference citations.
         """
         citations: List[Dict[str, Any]] = []
-        answer_paragraphs: List[str] = []
-
-        q_terms = set(re.findall(r"\b[a-zA-Z0-9_\$%-]+\b", query.lower()))
-
         for rank, res in enumerate(passages, start=1):
             chunk = res.chunk
             citation_item = {
@@ -245,34 +241,58 @@ class RAGEngine:
             }
             citations.append(citation_item)
 
-            # Extract sentences from chunk that address the query
-            sentences = re.split(r"(?<=[.!?])\s+", chunk.content)
-            scored_sentences = []
-            for s in sentences:
-                s_lower = s.lower()
-                matches = sum(1 for term in q_terms if term in s_lower)
-                if matches > 0:
-                    scored_sentences.append((matches, s.strip()))
+        if not passages:
+            return "No relevant information found in the documents.", citations
 
-            if scored_sentences:
-                scored_sentences.sort(key=lambda x: x[0], reverse=True)
-                top_s = [item[1] for item in scored_sentences[:3]]
-                para = " ".join(top_s)
-                answer_paragraphs.append(
-                    f"{para} **[Ref: {chunk.doc_name}, Page {chunk.page_number}]**"
-                )
-            else:
-                answer_paragraphs.append(
-                    f"{chunk.content} **[Ref: {chunk.doc_name}, Page {chunk.page_number}]**"
-                )
+        top_chunk = passages[0].chunk
+        q_terms = set(re.findall(r"\b[a-zA-Z0-9_\$%-]+\b", query.lower()))
+        stopwords = {"what", "when", "where", "which", "who", "whom", "whose", "why", "how", "is", "are", "was", "were", "the", "a", "an", "and", "or", "in", "on", "at", "to", "for", "of", "with"}
+        content_terms = [t for t in q_terms if t not in stopwords and len(t) > 2]
 
-        # Synthesize consolidated answer
-        lead_summary = f"Based on the official provisions in **{passages[0].chunk.doc_name}** (Page {passages[0].chunk.page_number}):\n\n"
-        body = "\n\n".join(f"• {p}" for p in answer_paragraphs[:2])
+        # Remove document headers and metadata lines completely
+        lines = [l.strip() for l in top_chunk.content.split('\n') if not re.search(r'(?i)(?:APEX|POLICIES|Office of the Dean|Circular No\.|Section \d+:|Official Document|Department of Urban|NEXACORP GLOBAL)', l)]
+        clean_text = ' '.join(lines)
+        clean_text = re.sub(r"[ \t]+", " ", clean_text).strip()
 
-        citations_footer = "\n\n### Supporting Document References:\n"
-        for c in citations[:3]:
-            citations_footer += f"- **Document**: `{c['source_doc']}` | **Page**: `{c['page']}` | **Confidence**: `{c['relevance_score']}`\n"
+        # Split into grammatical sentences by sentence terminators (. ! ?)
+        raw_sentences = [
+            s.strip() for s in re.split(r"(?<=[.!?])\s+", clean_text)
+            if len(s.strip()) > 15 and not s.strip().startswith("---")
+        ]
 
-        full_answer = lead_summary + body + citations_footer
-        return full_answer, citations
+        scored_clauses = []
+        for s in raw_sentences:
+            # Clean heading prefixes like "2.1 Mandatory Attendance Threshold "
+            s_clean = re.sub(r'^\d+\.\d+\s+[A-Za-z\s\-]+(?=[A-Z][a-z])', '', s).strip()
+            s_clean = re.sub(r'^[A-Za-z\s\-]+?\s+(?=(?:A student|NexaCorp|An immediate|Undergraduate|Full-time|Standard|Employees|To claim|Grade)\b)', '', s_clean, flags=re.IGNORECASE).strip()
+            s_clean = re.sub(r"^[A-Z\s\-]{6,}\s*\|\s*", "", s_clean).strip()
+
+            s_lower = s_clean.lower()
+            score = sum(2 for term in content_terms if term in s_lower)
+            if re.search(r"\d+[%$]?", s_clean):
+                score += 2
+            if score > 0:
+                scored_clauses.append((score, s_clean))
+
+        if scored_clauses:
+            scored_clauses.sort(key=lambda x: x[0], reverse=True)
+            # Pick single most relevant answering sentence
+            short_body = scored_clauses[0][1]
+        else:
+            short_body = raw_sentences[0] if raw_sentences else top_chunk.content
+
+        # If sentence was cut mid-phrase at chunk boundary, complete from adjacent passage
+        if short_body and not short_body.endswith((".", "!", "?")):
+            for p in passages[1:]:
+                if p.chunk.doc_name == top_chunk.doc_name and p.chunk.page_number == top_chunk.page_number:
+                    rem_parts = re.split(r"(?<=[.!?])\s+", p.chunk.content)
+                    if rem_parts:
+                        cont = rem_parts[0].strip()
+                        short_body = (short_body + " " + cont).strip()
+                        break
+            if not short_body.endswith((".", "!", "?")):
+                short_body += "."
+
+        # Direct short answer with concise reference
+        short_answer = f"{short_body}\n\n**Source**: `{top_chunk.doc_name}` (Page {top_chunk.page_number})"
+        return short_answer, citations

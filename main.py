@@ -40,8 +40,8 @@ def main():
 
     # Initialize Engine
     engine = RAGEngine(
-        chunk_size=450,
-        chunk_overlap=80,
+        chunk_size=700,
+        chunk_overlap=150,
         enable_reranking=not args.no_rerank,
         rerank_threshold=args.threshold
     )

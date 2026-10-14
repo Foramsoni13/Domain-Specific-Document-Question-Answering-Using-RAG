@@ -8,9 +8,9 @@
     "hit_rate_at_5": 1.0,
     "mrr": 1.0,
     "precision_at_3": 0.9697,
-    "groundedness_score": 0.8985,
+    "groundedness_score": 0.5394,
     "refusal_accuracy": 0.9333,
-    "avg_latency_ms": 25.35,
+    "avg_latency_ms": 23.64,
     "detailed_results": [
       {
         "id": "UNIV-01",
@@ -19,34 +19,34 @@
         "was_refused": false,
         "top_score": 0.8049147725105286,
         "citations_count": 5,
-        "latency_ms": 63.1
+        "latency_ms": 100.09
       },
       {
         "id": "UNIV-02",
         "question": "Under what conditions can attendance shortage be condoned on medical grounds, and what is the lowest condonable percentage?",
         "is_answerable": true,
         "was_refused": false,
-        "top_score": 0.6827586889266968,
+        "top_score": 0.6561985015869141,
         "citations_count": 5,
-        "latency_ms": 28.15
+        "latency_ms": 25.56
       },
       {
         "id": "UNIV-03",
         "question": "How many total credits are required to graduate with a B.Tech degree, and how many additional credits for Academic Honors?",
         "is_answerable": true,
         "was_refused": false,
-        "top_score": 0.8258050680160522,
+        "top_score": 0.722819447517395,
         "citations_count": 5,
-        "latency_ms": 30.86
+        "latency_ms": 26.31
       },
       {
         "id": "UNIV-04",
         "question": "What is the penalty for Similarity Level 2 plagiarism in capstone theses?",
         "is_answerable": true,
         "was_refused": false,
-        "top_score": 0.689803421497345,
+        "top_score": 0.7026883959770203,
         "citations_count": 5,
-        "latency_ms": 29.23
+        "latency_ms": 25.74
       },
       {
         "id": "HR-01",
@@ -55,7 +55,7 @@
         "was_refused": false,
         "top_score": 0.894345760345459,
         "citations_count": 5,
-        "latency_ms": 32.5
+        "latency_ms": 25.32
       },
       {
         "id": "HR-02",
@@ -64,7 +64,7 @@
         "was_refused": false,
         "top_score": 0.6709634065628052,
         "citations_count": 5,
-        "latency_ms": 9.4
+        "latency_ms": 8.57
       },
       {
         "id": "HR-03",
@@ -73,7 +73,7 @@
         "was_refused": false,
         "top_score": 0.6579817533493042,
         "citations_count": 5,
-        "latency_ms": 34.26
+        "latency_ms": 28.4
       },
       {
         "id": "HR-04",
@@ -82,61 +82,61 @@
         "was_refused": false,
         "top_score": 0.5431790947914124,
         "citations_count": 5,
-        "latency_ms": 8.86
+        "latency_ms": 8.87
       },
       {
         "id": "MUNI-01",
         "question": "What is the rebate percentage for early settlement of annual property tax before June 30th?",
         "is_answerable": true,
         "was_refused": false,
-        "top_score": 0.6727392673492432,
+        "top_score": 0.7269938588142395,
         "citations_count": 5,
-        "latency_ms": 9.42
+        "latency_ms": 8.58
       },
       {
         "id": "MUNI-02",
         "question": "What is the mandatory compensatory plantation ratio and penalty for felling a mature tree without permission?",
         "is_answerable": true,
         "was_refused": false,
-        "top_score": 0.6849566698074341,
+        "top_score": 0.7085856199264526,
         "citations_count": 5,
-        "latency_ms": 30.01
+        "latency_ms": 28.94
       },
       {
         "id": "MUNI-03",
         "question": "What are the three tiers and resolution timelines of the citizen grievance escalation hierarchy?",
         "is_answerable": true,
         "was_refused": false,
-        "top_score": 0.6661094427108765,
+        "top_score": 0.6853715181350708,
         "citations_count": 5,
-        "latency_ms": 9.17
+        "latency_ms": 8.78
       },
       {
         "id": "OOD-01",
         "question": "What is the capital city of Australia and what is its population?",
         "is_answerable": false,
         "was_refused": true,
-        "top_score": 0.1894877552986145,
+        "top_score": 0.21987947821617126,
         "citations_count": 0,
-        "latency_ms": 40.04
+        "latency_ms": 10.01
       },
       {
         "id": "OOD-02",
         "question": "How do I bake a gluten-free chocolate chip cookie at 350 degrees?",
         "is_answerable": false,
         "was_refused": true,
-        "top_score": 0.20513364672660828,
+        "top_score": 0.12243962287902832,
         "citations_count": 0,
-        "latency_ms": 9.24
+        "latency_ms": 8.99
       },
       {
         "id": "OOD-03",
         "question": "What is the dormitory curfew time on weekends for postgraduate doctoral students?",
         "is_answerable": false,
         "was_refused": true,
-        "top_score": 0.4647955298423767,
+        "top_score": 0.417457640171051,
         "citations_count": 0,
-        "latency_ms": 35.45
+        "latency_ms": 30.76
       },
       {
         "id": "OOD-04",
@@ -145,7 +145,7 @@
         "was_refused": false,
         "top_score": 0.5138974189758301,
         "citations_count": 5,
-        "latency_ms": 10.54
+        "latency_ms": 9.71
       }
     ],
     "pipeline_name": "Dense Semantic Only (Bi-Encoder)"
@@ -159,7 +159,7 @@
     "hit_rate_at_5": 1.0,
     "mrr": 1.0,
     "precision_at_3": 0.9697,
-    "groundedness_score": 0.853,
+    "groundedness_score": 0.5848,
     "refusal_accuracy": 0.7333,
     "avg_latency_ms": 0.3,
     "detailed_results": [
@@ -168,115 +168,115 @@
         "question": "What is the minimum attendance percentage required to be eligible for the End-Semester Examination?",
         "is_answerable": true,
         "was_refused": false,
-        "top_score": 17.85553144331889,
+        "top_score": 15.925328815033975,
         "citations_count": 5,
-        "latency_ms": 0.45
+        "latency_ms": 0.67
       },
       {
         "id": "UNIV-02",
         "question": "Under what conditions can attendance shortage be condoned on medical grounds, and what is the lowest condonable percentage?",
         "is_answerable": true,
         "was_refused": false,
-        "top_score": 14.913904826914123,
+        "top_score": 12.419918338642114,
         "citations_count": 5,
-        "latency_ms": 0.37
+        "latency_ms": 0.33
       },
       {
         "id": "UNIV-03",
         "question": "How many total credits are required to graduate with a B.Tech degree, and how many additional credits for Academic Honors?",
         "is_answerable": true,
         "was_refused": false,
-        "top_score": 33.85758669503431,
+        "top_score": 25.826407828230053,
         "citations_count": 5,
-        "latency_ms": 0.4
+        "latency_ms": 0.36
       },
       {
         "id": "UNIV-04",
         "question": "What is the penalty for Similarity Level 2 plagiarism in capstone theses?",
         "is_answerable": true,
         "was_refused": false,
-        "top_score": 20.17970420976782,
+        "top_score": 18.982422298961993,
         "citations_count": 5,
-        "latency_ms": 0.29
+        "latency_ms": 0.27
       },
       {
         "id": "HR-01",
         "question": "What is the duration of the mandatory probationary period for newly hired employees at NexaCorp?",
         "is_answerable": true,
         "was_refused": false,
-        "top_score": 23.60483313763039,
+        "top_score": 22.809223089975948,
         "citations_count": 5,
-        "latency_ms": 0.33
+        "latency_ms": 0.29
       },
       {
         "id": "HR-02",
         "question": "How much paid primary caregiver parental leave is provided, and what is the eligibility criteria?",
         "is_answerable": true,
         "was_refused": false,
-        "top_score": 19.341159751013635,
+        "top_score": 19.385151813269097,
         "citations_count": 5,
-        "latency_ms": 0.3
+        "latency_ms": 0.25
       },
       {
         "id": "HR-03",
         "question": "What is the maximum company 401(k) matching percentage and vesting schedule?",
         "is_answerable": true,
         "was_refused": false,
-        "top_score": 26.41848139837692,
+        "top_score": 27.214392683296662,
         "citations_count": 5,
-        "latency_ms": 0.25
+        "latency_ms": 0.22
       },
       {
         "id": "HR-04",
         "question": "What is the annual reimbursement ceiling for professional development, certifications, and conferences?",
         "is_answerable": true,
         "was_refused": false,
-        "top_score": 21.78406999884231,
+        "top_score": 22.22162542992619,
         "citations_count": 5,
-        "latency_ms": 0.25
+        "latency_ms": 0.22
       },
       {
         "id": "MUNI-01",
         "question": "What is the rebate percentage for early settlement of annual property tax before June 30th?",
         "is_answerable": true,
         "was_refused": false,
-        "top_score": 27.028435476251133,
+        "top_score": 25.894979376051495,
         "citations_count": 5,
-        "latency_ms": 0.29
+        "latency_ms": 0.28
       },
       {
         "id": "MUNI-02",
         "question": "What is the mandatory compensatory plantation ratio and penalty for felling a mature tree without permission?",
         "is_answerable": true,
         "was_refused": false,
-        "top_score": 25.903441863231066,
+        "top_score": 31.396420892225436,
         "citations_count": 5,
-        "latency_ms": 0.3
+        "latency_ms": 0.28
       },
       {
         "id": "MUNI-03",
         "question": "What are the three tiers and resolution timelines of the citizen grievance escalation hierarchy?",
         "is_answerable": true,
         "was_refused": false,
-        "top_score": 18.87152961962279,
+        "top_score": 18.42838802225278,
         "citations_count": 5,
-        "latency_ms": 0.29
+        "latency_ms": 0.27
       },
       {
         "id": "OOD-01",
         "question": "What is the capital city of Australia and what is its population?",
         "is_answerable": false,
         "was_refused": false,
-        "top_score": 5.962903641591385,
+        "top_score": 5.492325597004749,
         "citations_count": 5,
-        "latency_ms": 0.25
+        "latency_ms": 0.28
       },
       {
         "id": "OOD-02",
         "question": "How do I bake a gluten-free chocolate chip cookie at 350 degrees?",
         "is_answerable": false,
         "was_refused": false,
-        "top_score": 5.60051105689849,
+        "top_score": 4.627905247605417,
         "citations_count": 5,
         "latency_ms": 0.25
       },
@@ -285,7 +285,7 @@
         "question": "What is the dormitory curfew time on weekends for postgraduate doctoral students?",
         "is_answerable": false,
         "was_refused": false,
-        "top_score": 6.276156882691191,
+        "top_score": 4.7400892848125995,
         "citations_count": 5,
         "latency_ms": 0.24
       },
@@ -294,9 +294,9 @@
         "question": "Does NexaCorp provide company cars or corporate lease vehicles for sales engineers?",
         "is_answerable": false,
         "was_refused": false,
-        "top_score": 7.523706552374634,
+        "top_score": 8.030827799590213,
         "citations_count": 5,
-        "latency_ms": 0.25
+        "latency_ms": 0.23
       }
     ],
     "pipeline_name": "Sparse Lexical Only (BM25)"
@@ -305,14 +305,14 @@
     "retrieval_mode": "hybrid",
     "reranking_enabled": false,
     "total_queries": 15,
-    "hit_rate_at_1": 1.0,
+    "hit_rate_at_1": 0.9091,
     "hit_rate_at_3": 1.0,
     "hit_rate_at_5": 1.0,
-    "mrr": 1.0,
-    "precision_at_3": 0.9091,
-    "groundedness_score": 0.6303,
+    "mrr": 0.9545,
+    "precision_at_3": 0.8788,
+    "groundedness_score": 0.6,
     "refusal_accuracy": 0.7333,
-    "avg_latency_ms": 9.83,
+    "avg_latency_ms": 9.3,
     "detailed_results": [
       {
         "id": "UNIV-01",
@@ -321,7 +321,7 @@
         "was_refused": false,
         "top_score": 1.0,
         "citations_count": 5,
-        "latency_ms": 9.98
+        "latency_ms": 9.35
       },
       {
         "id": "UNIV-02",
@@ -330,7 +330,7 @@
         "was_refused": false,
         "top_score": 1.0,
         "citations_count": 5,
-        "latency_ms": 10.16
+        "latency_ms": 9.37
       },
       {
         "id": "UNIV-03",
@@ -339,7 +339,7 @@
         "was_refused": false,
         "top_score": 1.0,
         "citations_count": 5,
-        "latency_ms": 10.12
+        "latency_ms": 9.93
       },
       {
         "id": "UNIV-04",
@@ -348,7 +348,7 @@
         "was_refused": false,
         "top_score": 1.0,
         "citations_count": 5,
-        "latency_ms": 9.58
+        "latency_ms": 9.07
       },
       {
         "id": "HR-01",
@@ -357,7 +357,7 @@
         "was_refused": false,
         "top_score": 1.0,
         "citations_count": 5,
-        "latency_ms": 9.54
+        "latency_ms": 8.96
       },
       {
         "id": "HR-02",
@@ -366,7 +366,7 @@
         "was_refused": false,
         "top_score": 1.0,
         "citations_count": 5,
-        "latency_ms": 9.54
+        "latency_ms": 8.93
       },
       {
         "id": "HR-03",
@@ -375,7 +375,7 @@
         "was_refused": false,
         "top_score": 1.0,
         "citations_count": 5,
-        "latency_ms": 9.27
+        "latency_ms": 9.08
       },
       {
         "id": "HR-04",
@@ -384,7 +384,7 @@
         "was_refused": false,
         "top_score": 1.0,
         "citations_count": 5,
-        "latency_ms": 9.13
+        "latency_ms": 8.88
       },
       {
         "id": "MUNI-01",
@@ -393,7 +393,7 @@
         "was_refused": false,
         "top_score": 1.0,
         "citations_count": 5,
-        "latency_ms": 9.62
+        "latency_ms": 9.05
       },
       {
         "id": "MUNI-02",
@@ -402,7 +402,7 @@
         "was_refused": false,
         "top_score": 1.0,
         "citations_count": 5,
-        "latency_ms": 9.37
+        "latency_ms": 8.91
       },
       {
         "id": "MUNI-03",
@@ -411,7 +411,7 @@
         "was_refused": false,
         "top_score": 1.0,
         "citations_count": 5,
-        "latency_ms": 9.28
+        "latency_ms": 8.79
       },
       {
         "id": "OOD-01",
@@ -420,7 +420,7 @@
         "was_refused": false,
         "top_score": 1.0,
         "citations_count": 5,
-        "latency_ms": 11.61
+        "latency_ms": 10.37
       },
       {
         "id": "OOD-02",
@@ -429,7 +429,7 @@
         "was_refused": false,
         "top_score": 1.0,
         "citations_count": 5,
-        "latency_ms": 9.69
+        "latency_ms": 9.19
       },
       {
         "id": "OOD-03",
@@ -438,7 +438,7 @@
         "was_refused": false,
         "top_score": 1.0,
         "citations_count": 5,
-        "latency_ms": 10.09
+        "latency_ms": 9.76
       },
       {
         "id": "OOD-04",
@@ -447,7 +447,7 @@
         "was_refused": false,
         "top_score": 1.0,
         "citations_count": 5,
-        "latency_ms": 10.49
+        "latency_ms": 9.79
       }
     ],
     "pipeline_name": "Hybrid (Dense + BM25 RRF)"
@@ -461,144 +461,144 @@
     "hit_rate_at_5": 1.0,
     "mrr": 1.0,
     "precision_at_3": 0.8788,
-    "groundedness_score": 0.6136,
-    "refusal_accuracy": 0.9333,
-    "avg_latency_ms": 102.42,
+    "groundedness_score": 0.6303,
+    "refusal_accuracy": 1.0,
+    "avg_latency_ms": 210.24,
     "detailed_results": [
       {
         "id": "UNIV-01",
         "question": "What is the minimum attendance percentage required to be eligible for the End-Semester Examination?",
         "is_answerable": true,
         "was_refused": false,
-        "top_score": 0.5630818009376526,
+        "top_score": 0.9994840621948242,
         "citations_count": 5,
-        "latency_ms": 164.72
+        "latency_ms": 252.84
       },
       {
         "id": "UNIV-02",
         "question": "Under what conditions can attendance shortage be condoned on medical grounds, and what is the lowest condonable percentage?",
         "is_answerable": true,
         "was_refused": false,
-        "top_score": 0.7921828627586365,
+        "top_score": 0.9733759164810181,
         "citations_count": 5,
-        "latency_ms": 105.88
+        "latency_ms": 217.64
       },
       {
         "id": "UNIV-03",
         "question": "How many total credits are required to graduate with a B.Tech degree, and how many additional credits for Academic Honors?",
         "is_answerable": true,
         "was_refused": false,
-        "top_score": 0.9999233484268188,
+        "top_score": 0.9996674060821533,
         "citations_count": 5,
-        "latency_ms": 114.42
+        "latency_ms": 165.47
       },
       {
         "id": "UNIV-04",
         "question": "What is the penalty for Similarity Level 2 plagiarism in capstone theses?",
         "is_answerable": true,
         "was_refused": false,
-        "top_score": 0.9993859529495239,
+        "top_score": 0.9967057108879089,
         "citations_count": 5,
-        "latency_ms": 95.13
+        "latency_ms": 158.09
       },
       {
         "id": "HR-01",
         "question": "What is the duration of the mandatory probationary period for newly hired employees at NexaCorp?",
         "is_answerable": true,
         "was_refused": false,
-        "top_score": 0.9998362064361572,
+        "top_score": 0.999896764755249,
         "citations_count": 5,
-        "latency_ms": 73.93
+        "latency_ms": 155.72
       },
       {
         "id": "HR-02",
         "question": "How much paid primary caregiver parental leave is provided, and what is the eligibility criteria?",
         "is_answerable": true,
         "was_refused": false,
-        "top_score": 0.9935122132301331,
+        "top_score": 0.9747538566589355,
         "citations_count": 5,
-        "latency_ms": 99.01
+        "latency_ms": 141.04
       },
       {
         "id": "HR-03",
         "question": "What is the maximum company 401(k) matching percentage and vesting schedule?",
         "is_answerable": true,
         "was_refused": false,
-        "top_score": 0.9991838335990906,
+        "top_score": 0.9972518086433411,
         "citations_count": 5,
-        "latency_ms": 72.78
+        "latency_ms": 204.7
       },
       {
         "id": "HR-04",
         "question": "What is the annual reimbursement ceiling for professional development, certifications, and conferences?",
         "is_answerable": true,
         "was_refused": false,
-        "top_score": 0.7390958666801453,
+        "top_score": 0.7448566555976868,
         "citations_count": 5,
-        "latency_ms": 94.8
+        "latency_ms": 245.11
       },
       {
         "id": "MUNI-01",
         "question": "What is the rebate percentage for early settlement of annual property tax before June 30th?",
         "is_answerable": true,
         "was_refused": false,
-        "top_score": 0.9986649751663208,
+        "top_score": 0.9994619488716125,
         "citations_count": 5,
-        "latency_ms": 153.86
+        "latency_ms": 207.88
       },
       {
         "id": "MUNI-02",
         "question": "What is the mandatory compensatory plantation ratio and penalty for felling a mature tree without permission?",
         "is_answerable": true,
         "was_refused": false,
-        "top_score": 0.9852418303489685,
+        "top_score": 0.9978960752487183,
         "citations_count": 5,
-        "latency_ms": 106.57
+        "latency_ms": 308.97
       },
       {
         "id": "MUNI-03",
         "question": "What are the three tiers and resolution timelines of the citizen grievance escalation hierarchy?",
         "is_answerable": true,
-        "was_refused": true,
-        "top_score": 0.011470823548734188,
-        "citations_count": 0,
-        "latency_ms": 66.16
+        "was_refused": false,
+        "top_score": 0.998590886592865,
+        "citations_count": 5,
+        "latency_ms": 190.7
       },
       {
         "id": "OOD-01",
         "question": "What is the capital city of Australia and what is its population?",
         "is_answerable": false,
         "was_refused": true,
-        "top_score": 1.511315622337861e-05,
+        "top_score": 1.582580262038391e-05,
         "citations_count": 0,
-        "latency_ms": 142.79
+        "latency_ms": 390.57
       },
       {
         "id": "OOD-02",
         "question": "How do I bake a gluten-free chocolate chip cookie at 350 degrees?",
         "is_answerable": false,
         "was_refused": true,
-        "top_score": 1.4499674762191717e-05,
+        "top_score": 1.5298404832719825e-05,
         "citations_count": 0,
-        "latency_ms": 68.98
+        "latency_ms": 142.35
       },
       {
         "id": "OOD-03",
         "question": "What is the dormitory curfew time on weekends for postgraduate doctoral students?",
         "is_answerable": false,
         "was_refused": true,
-        "top_score": 2.1501056835404597e-05,
+        "top_score": 4.697482654592022e-05,
         "citations_count": 0,
-        "latency_ms": 104.65
+        "latency_ms": 241.15
       },
       {
         "id": "OOD-04",
         "question": "Does NexaCorp provide company cars or corporate lease vehicles for sales engineers?",
         "is_answerable": false,
         "was_refused": true,
-        "top_score": 0.013668157160282135,
+        "top_score": 0.02017023041844368,
         "citations_count": 0,
-        "latency_ms": 72.58
+        "latency_ms": 131.33
       }
     ],
     "pipeline_name": "Full System (Hybrid + Cross-Encoder Reranker)"
