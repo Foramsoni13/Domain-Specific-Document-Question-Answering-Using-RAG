@@ -1,0 +1,68 @@
+================================================================================
+APEX TECHNICAL UNIVERSITY - ACADEMIC REGULATIONS & EXAMINATION POLICIES (2025-2026)
+Office of the Dean of Academic Affairs | Circular No. ATU/RO/2025/1102
+================================================================================
+
+--- [PAGE 1] ---
+Section 1: General Academic Structure & Credit Framework
+
+1.1 Academic Calendar & Semesters
+The academic year at Apex Technical University is partitioned into two regular semesters: Autumn Semester (August to December) and Spring Semester (January to May), supplemented by an optional 6-week Summer Term (June to July). Each standard semester spans a minimum of 90 instructional working days excluding examinations.
+
+1.2 Credit Definition and Distribution
+One academic credit is formally defined as:
+(a) One hour of classroom lecture (L) per week per semester = 1.0 Credit
+(b) One hour of tutorial (T) per week per semester = 1.0 Credit
+(c) Two hours of laboratory or studio practical work (P) per week per semester = 1.0 Credit
+Undergraduate degree students in Bachelor of Technology (B.Tech) must complete a cumulative minimum of 160 credits to qualify for graduation. For B.Tech with Academic Honors, students must earn an additional 18 honors credits through advanced electives and a supervised capstone research thesis.
+
+1.3 Maximum Allowable Duration
+A student registered in a 4-year degree programme must successfully complete all requirements within a maximum time ceiling of 6 consecutive academic years. Failure to complete all degree requirements within this 6-year window results in automatic cancellation of academic registration.
+
+--- [PAGE 2] ---
+Section 2: Attendance Requirements & Condone Exceptions
+
+2.1 Mandatory Attendance Threshold
+A student must maintain a minimum attendance of 75% in aggregate across all lectures, tutorials, and practical laboratory sessions in each registered course to be eligible to appear for the End-Semester Examination.
+
+2.2 Medical Condonation Policy
+If a student's attendance falls between 65% and 74.9% due to verified serious illness, hospitalization, or representing the University in national/international academic or sports events, condonation of shortage of attendance may be granted by the Dean of Academic Affairs. To claim medical condonation:
+(a) The student must submit an official medical certificate issued by a registered medical practitioner along with discharge summaries within 5 working days of resuming classes.
+(b) The departmental faculty advisor and Head of Department (HOD) must verify and forward the application.
+(c) A non-refundable condonation processing fee of $50 per course is levied upon approval.
+Attendance falling below 65% under any circumstances cannot be condoned, and the student will be awarded an 'FA' (Failure due to Attendance) grade, mandating course re-registration.
+
+--- [PAGE 3] ---
+Section 3: Grading Scale, CGPA Calculation, and Promotion
+
+3.1 10-Point Letter Grading System
+Performance in each course is evaluated on a 10-point letter scale:
+• Grade 'O' (Outstanding): 10 Grade Points (Marks >= 90%)
+• Grade 'A+' (Excellent): 9 Grade Points (Marks 80% to 89%)
+• Grade 'A' (Very Good): 8 Grade Points (Marks 70% to 79%)
+• Grade 'B+' (Good): 7 Grade Points (Marks 60% to 69%)
+• Grade 'B' (Above Average): 6 Grade Points (Marks 50% to 59%)
+• Grade 'C' (Average / Pass): 5 Grade Points (Marks 40% to 49%)
+• Grade 'F' (Fail): 0 Grade Points (Marks < 40%)
+• Grade 'I' (Incomplete due to authorized medical emergency during final exam)
+• Grade 'FA' (Fail due to Attendance): 0 Grade Points
+
+3.2 Minimum SGPA and CGPA Promotion Criteria
+A student is eligible for progression to the subsequent academic year provided:
+(a) Minimum Cumulative Grade Point Average (CGPA) of 5.0 is maintained at the conclusion of each academic year.
+(b) A student can carry over a maximum of 4 uncleared backlog courses (F grades) into the 3rd year, and a maximum of 2 backlogs into the final (4th) year.
+
+--- [PAGE 4] ---
+Section 4: Re-evaluation, Grievances, and Academic Integrity
+
+4.1 Answer Script Verification and Re-evaluation
+A student dissatisfied with their grade in the End-Semester Examination may apply for formal re-evaluation within 14 calendar days of result publication:
+• Step 1: Request photocopy/inspection of evaluated answer script upon payment of $20 per course.
+• Step 2: If a scoring discrepancy exceeds 5% of total marks, request blind re-evaluation by an external examiner with a fee of $60 per course. If the revised score varies by more than 10%, the higher score is assigned and 50% of the re-evaluation fee is refunded.
+
+4.2 Academic Plagiarism and Dishonesty Penalties
+All student project reports, seminar papers, and capstone theses are subjected to similarity checking via Turnitin:
+• Similarity Level 0 (up to 10%): Permissible with minor citations.
+• Similarity Level 1 (10% to 25%): Student is required to revise and resubmit within 7 days.
+• Similarity Level 2 (25% to 50%): Disqualification from the current semester's submission and deduction of one full letter grade.
+• Similarity Level 3 (Above 50% or exam cheating): Zero marks awarded, suspension for one full academic year, and formal disciplinary notice on academic transcript.

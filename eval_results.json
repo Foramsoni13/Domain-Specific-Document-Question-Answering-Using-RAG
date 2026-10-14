@@ -1,0 +1,606 @@
+[
+  {
+    "retrieval_mode": "dense",
+    "reranking_enabled": false,
+    "total_queries": 15,
+    "hit_rate_at_1": 1.0,
+    "hit_rate_at_3": 1.0,
+    "hit_rate_at_5": 1.0,
+    "mrr": 1.0,
+    "precision_at_3": 0.9697,
+    "groundedness_score": 0.8985,
+    "refusal_accuracy": 0.9333,
+    "avg_latency_ms": 25.35,
+    "detailed_results": [
+      {
+        "id": "UNIV-01",
+        "question": "What is the minimum attendance percentage required to be eligible for the End-Semester Examination?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 0.8049147725105286,
+        "citations_count": 5,
+        "latency_ms": 63.1
+      },
+      {
+        "id": "UNIV-02",
+        "question": "Under what conditions can attendance shortage be condoned on medical grounds, and what is the lowest condonable percentage?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 0.6827586889266968,
+        "citations_count": 5,
+        "latency_ms": 28.15
+      },
+      {
+        "id": "UNIV-03",
+        "question": "How many total credits are required to graduate with a B.Tech degree, and how many additional credits for Academic Honors?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 0.8258050680160522,
+        "citations_count": 5,
+        "latency_ms": 30.86
+      },
+      {
+        "id": "UNIV-04",
+        "question": "What is the penalty for Similarity Level 2 plagiarism in capstone theses?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 0.689803421497345,
+        "citations_count": 5,
+        "latency_ms": 29.23
+      },
+      {
+        "id": "HR-01",
+        "question": "What is the duration of the mandatory probationary period for newly hired employees at NexaCorp?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 0.894345760345459,
+        "citations_count": 5,
+        "latency_ms": 32.5
+      },
+      {
+        "id": "HR-02",
+        "question": "How much paid primary caregiver parental leave is provided, and what is the eligibility criteria?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 0.6709634065628052,
+        "citations_count": 5,
+        "latency_ms": 9.4
+      },
+      {
+        "id": "HR-03",
+        "question": "What is the maximum company 401(k) matching percentage and vesting schedule?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 0.6579817533493042,
+        "citations_count": 5,
+        "latency_ms": 34.26
+      },
+      {
+        "id": "HR-04",
+        "question": "What is the annual reimbursement ceiling for professional development, certifications, and conferences?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 0.5431790947914124,
+        "citations_count": 5,
+        "latency_ms": 8.86
+      },
+      {
+        "id": "MUNI-01",
+        "question": "What is the rebate percentage for early settlement of annual property tax before June 30th?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 0.6727392673492432,
+        "citations_count": 5,
+        "latency_ms": 9.42
+      },
+      {
+        "id": "MUNI-02",
+        "question": "What is the mandatory compensatory plantation ratio and penalty for felling a mature tree without permission?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 0.6849566698074341,
+        "citations_count": 5,
+        "latency_ms": 30.01
+      },
+      {
+        "id": "MUNI-03",
+        "question": "What are the three tiers and resolution timelines of the citizen grievance escalation hierarchy?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 0.6661094427108765,
+        "citations_count": 5,
+        "latency_ms": 9.17
+      },
+      {
+        "id": "OOD-01",
+        "question": "What is the capital city of Australia and what is its population?",
+        "is_answerable": false,
+        "was_refused": true,
+        "top_score": 0.1894877552986145,
+        "citations_count": 0,
+        "latency_ms": 40.04
+      },
+      {
+        "id": "OOD-02",
+        "question": "How do I bake a gluten-free chocolate chip cookie at 350 degrees?",
+        "is_answerable": false,
+        "was_refused": true,
+        "top_score": 0.20513364672660828,
+        "citations_count": 0,
+        "latency_ms": 9.24
+      },
+      {
+        "id": "OOD-03",
+        "question": "What is the dormitory curfew time on weekends for postgraduate doctoral students?",
+        "is_answerable": false,
+        "was_refused": true,
+        "top_score": 0.4647955298423767,
+        "citations_count": 0,
+        "latency_ms": 35.45
+      },
+      {
+        "id": "OOD-04",
+        "question": "Does NexaCorp provide company cars or corporate lease vehicles for sales engineers?",
+        "is_answerable": false,
+        "was_refused": false,
+        "top_score": 0.5138974189758301,
+        "citations_count": 5,
+        "latency_ms": 10.54
+      }
+    ],
+    "pipeline_name": "Dense Semantic Only (Bi-Encoder)"
+  },
+  {
+    "retrieval_mode": "sparse",
+    "reranking_enabled": false,
+    "total_queries": 15,
+    "hit_rate_at_1": 1.0,
+    "hit_rate_at_3": 1.0,
+    "hit_rate_at_5": 1.0,
+    "mrr": 1.0,
+    "precision_at_3": 0.9697,
+    "groundedness_score": 0.853,
+    "refusal_accuracy": 0.7333,
+    "avg_latency_ms": 0.3,
+    "detailed_results": [
+      {
+        "id": "UNIV-01",
+        "question": "What is the minimum attendance percentage required to be eligible for the End-Semester Examination?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 17.85553144331889,
+        "citations_count": 5,
+        "latency_ms": 0.45
+      },
+      {
+        "id": "UNIV-02",
+        "question": "Under what conditions can attendance shortage be condoned on medical grounds, and what is the lowest condonable percentage?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 14.913904826914123,
+        "citations_count": 5,
+        "latency_ms": 0.37
+      },
+      {
+        "id": "UNIV-03",
+        "question": "How many total credits are required to graduate with a B.Tech degree, and how many additional credits for Academic Honors?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 33.85758669503431,
+        "citations_count": 5,
+        "latency_ms": 0.4
+      },
+      {
+        "id": "UNIV-04",
+        "question": "What is the penalty for Similarity Level 2 plagiarism in capstone theses?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 20.17970420976782,
+        "citations_count": 5,
+        "latency_ms": 0.29
+      },
+      {
+        "id": "HR-01",
+        "question": "What is the duration of the mandatory probationary period for newly hired employees at NexaCorp?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 23.60483313763039,
+        "citations_count": 5,
+        "latency_ms": 0.33
+      },
+      {
+        "id": "HR-02",
+        "question": "How much paid primary caregiver parental leave is provided, and what is the eligibility criteria?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 19.341159751013635,
+        "citations_count": 5,
+        "latency_ms": 0.3
+      },
+      {
+        "id": "HR-03",
+        "question": "What is the maximum company 401(k) matching percentage and vesting schedule?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 26.41848139837692,
+        "citations_count": 5,
+        "latency_ms": 0.25
+      },
+      {
+        "id": "HR-04",
+        "question": "What is the annual reimbursement ceiling for professional development, certifications, and conferences?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 21.78406999884231,
+        "citations_count": 5,
+        "latency_ms": 0.25
+      },
+      {
+        "id": "MUNI-01",
+        "question": "What is the rebate percentage for early settlement of annual property tax before June 30th?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 27.028435476251133,
+        "citations_count": 5,
+        "latency_ms": 0.29
+      },
+      {
+        "id": "MUNI-02",
+        "question": "What is the mandatory compensatory plantation ratio and penalty for felling a mature tree without permission?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 25.903441863231066,
+        "citations_count": 5,
+        "latency_ms": 0.3
+      },
+      {
+        "id": "MUNI-03",
+        "question": "What are the three tiers and resolution timelines of the citizen grievance escalation hierarchy?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 18.87152961962279,
+        "citations_count": 5,
+        "latency_ms": 0.29
+      },
+      {
+        "id": "OOD-01",
+        "question": "What is the capital city of Australia and what is its population?",
+        "is_answerable": false,
+        "was_refused": false,
+        "top_score": 5.962903641591385,
+        "citations_count": 5,
+        "latency_ms": 0.25
+      },
+      {
+        "id": "OOD-02",
+        "question": "How do I bake a gluten-free chocolate chip cookie at 350 degrees?",
+        "is_answerable": false,
+        "was_refused": false,
+        "top_score": 5.60051105689849,
+        "citations_count": 5,
+        "latency_ms": 0.25
+      },
+      {
+        "id": "OOD-03",
+        "question": "What is the dormitory curfew time on weekends for postgraduate doctoral students?",
+        "is_answerable": false,
+        "was_refused": false,
+        "top_score": 6.276156882691191,
+        "citations_count": 5,
+        "latency_ms": 0.24
+      },
+      {
+        "id": "OOD-04",
+        "question": "Does NexaCorp provide company cars or corporate lease vehicles for sales engineers?",
+        "is_answerable": false,
+        "was_refused": false,
+        "top_score": 7.523706552374634,
+        "citations_count": 5,
+        "latency_ms": 0.25
+      }
+    ],
+    "pipeline_name": "Sparse Lexical Only (BM25)"
+  },
+  {
+    "retrieval_mode": "hybrid",
+    "reranking_enabled": false,
+    "total_queries": 15,
+    "hit_rate_at_1": 1.0,
+    "hit_rate_at_3": 1.0,
+    "hit_rate_at_5": 1.0,
+    "mrr": 1.0,
+    "precision_at_3": 0.9091,
+    "groundedness_score": 0.6303,
+    "refusal_accuracy": 0.7333,
+    "avg_latency_ms": 9.83,
+    "detailed_results": [
+      {
+        "id": "UNIV-01",
+        "question": "What is the minimum attendance percentage required to be eligible for the End-Semester Examination?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 1.0,
+        "citations_count": 5,
+        "latency_ms": 9.98
+      },
+      {
+        "id": "UNIV-02",
+        "question": "Under what conditions can attendance shortage be condoned on medical grounds, and what is the lowest condonable percentage?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 1.0,
+        "citations_count": 5,
+        "latency_ms": 10.16
+      },
+      {
+        "id": "UNIV-03",
+        "question": "How many total credits are required to graduate with a B.Tech degree, and how many additional credits for Academic Honors?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 1.0,
+        "citations_count": 5,
+        "latency_ms": 10.12
+      },
+      {
+        "id": "UNIV-04",
+        "question": "What is the penalty for Similarity Level 2 plagiarism in capstone theses?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 1.0,
+        "citations_count": 5,
+        "latency_ms": 9.58
+      },
+      {
+        "id": "HR-01",
+        "question": "What is the duration of the mandatory probationary period for newly hired employees at NexaCorp?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 1.0,
+        "citations_count": 5,
+        "latency_ms": 9.54
+      },
+      {
+        "id": "HR-02",
+        "question": "How much paid primary caregiver parental leave is provided, and what is the eligibility criteria?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 1.0,
+        "citations_count": 5,
+        "latency_ms": 9.54
+      },
+      {
+        "id": "HR-03",
+        "question": "What is the maximum company 401(k) matching percentage and vesting schedule?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 1.0,
+        "citations_count": 5,
+        "latency_ms": 9.27
+      },
+      {
+        "id": "HR-04",
+        "question": "What is the annual reimbursement ceiling for professional development, certifications, and conferences?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 1.0,
+        "citations_count": 5,
+        "latency_ms": 9.13
+      },
+      {
+        "id": "MUNI-01",
+        "question": "What is the rebate percentage for early settlement of annual property tax before June 30th?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 1.0,
+        "citations_count": 5,
+        "latency_ms": 9.62
+      },
+      {
+        "id": "MUNI-02",
+        "question": "What is the mandatory compensatory plantation ratio and penalty for felling a mature tree without permission?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 1.0,
+        "citations_count": 5,
+        "latency_ms": 9.37
+      },
+      {
+        "id": "MUNI-03",
+        "question": "What are the three tiers and resolution timelines of the citizen grievance escalation hierarchy?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 1.0,
+        "citations_count": 5,
+        "latency_ms": 9.28
+      },
+      {
+        "id": "OOD-01",
+        "question": "What is the capital city of Australia and what is its population?",
+        "is_answerable": false,
+        "was_refused": false,
+        "top_score": 1.0,
+        "citations_count": 5,
+        "latency_ms": 11.61
+      },
+      {
+        "id": "OOD-02",
+        "question": "How do I bake a gluten-free chocolate chip cookie at 350 degrees?",
+        "is_answerable": false,
+        "was_refused": false,
+        "top_score": 1.0,
+        "citations_count": 5,
+        "latency_ms": 9.69
+      },
+      {
+        "id": "OOD-03",
+        "question": "What is the dormitory curfew time on weekends for postgraduate doctoral students?",
+        "is_answerable": false,
+        "was_refused": false,
+        "top_score": 1.0,
+        "citations_count": 5,
+        "latency_ms": 10.09
+      },
+      {
+        "id": "OOD-04",
+        "question": "Does NexaCorp provide company cars or corporate lease vehicles for sales engineers?",
+        "is_answerable": false,
+        "was_refused": false,
+        "top_score": 1.0,
+        "citations_count": 5,
+        "latency_ms": 10.49
+      }
+    ],
+    "pipeline_name": "Hybrid (Dense + BM25 RRF)"
+  },
+  {
+    "retrieval_mode": "hybrid",
+    "reranking_enabled": true,
+    "total_queries": 15,
+    "hit_rate_at_1": 1.0,
+    "hit_rate_at_3": 1.0,
+    "hit_rate_at_5": 1.0,
+    "mrr": 1.0,
+    "precision_at_3": 0.8788,
+    "groundedness_score": 0.6136,
+    "refusal_accuracy": 0.9333,
+    "avg_latency_ms": 102.42,
+    "detailed_results": [
+      {
+        "id": "UNIV-01",
+        "question": "What is the minimum attendance percentage required to be eligible for the End-Semester Examination?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 0.5630818009376526,
+        "citations_count": 5,
+        "latency_ms": 164.72
+      },
+      {
+        "id": "UNIV-02",
+        "question": "Under what conditions can attendance shortage be condoned on medical grounds, and what is the lowest condonable percentage?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 0.7921828627586365,
+        "citations_count": 5,
+        "latency_ms": 105.88
+      },
+      {
+        "id": "UNIV-03",
+        "question": "How many total credits are required to graduate with a B.Tech degree, and how many additional credits for Academic Honors?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 0.9999233484268188,
+        "citations_count": 5,
+        "latency_ms": 114.42
+      },
+      {
+        "id": "UNIV-04",
+        "question": "What is the penalty for Similarity Level 2 plagiarism in capstone theses?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 0.9993859529495239,
+        "citations_count": 5,
+        "latency_ms": 95.13
+      },
+      {
+        "id": "HR-01",
+        "question": "What is the duration of the mandatory probationary period for newly hired employees at NexaCorp?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 0.9998362064361572,
+        "citations_count": 5,
+        "latency_ms": 73.93
+      },
+      {
+        "id": "HR-02",
+        "question": "How much paid primary caregiver parental leave is provided, and what is the eligibility criteria?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 0.9935122132301331,
+        "citations_count": 5,
+        "latency_ms": 99.01
+      },
+      {
+        "id": "HR-03",
+        "question": "What is the maximum company 401(k) matching percentage and vesting schedule?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 0.9991838335990906,
+        "citations_count": 5,
+        "latency_ms": 72.78
+      },
+      {
+        "id": "HR-04",
+        "question": "What is the annual reimbursement ceiling for professional development, certifications, and conferences?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 0.7390958666801453,
+        "citations_count": 5,
+        "latency_ms": 94.8
+      },
+      {
+        "id": "MUNI-01",
+        "question": "What is the rebate percentage for early settlement of annual property tax before June 30th?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 0.9986649751663208,
+        "citations_count": 5,
+        "latency_ms": 153.86
+      },
+      {
+        "id": "MUNI-02",
+        "question": "What is the mandatory compensatory plantation ratio and penalty for felling a mature tree without permission?",
+        "is_answerable": true,
+        "was_refused": false,
+        "top_score": 0.9852418303489685,
+        "citations_count": 5,
+        "latency_ms": 106.57
+      },
+      {
+        "id": "MUNI-03",
+        "question": "What are the three tiers and resolution timelines of the citizen grievance escalation hierarchy?",
+        "is_answerable": true,
+        "was_refused": true,
+        "top_score": 0.011470823548734188,
+        "citations_count": 0,
+        "latency_ms": 66.16
+      },
+      {
+        "id": "OOD-01",
+        "question": "What is the capital city of Australia and what is its population?",
+        "is_answerable": false,
+        "was_refused": true,
+        "top_score": 1.511315622337861e-05,
+        "citations_count": 0,
+        "latency_ms": 142.79
+      },
+      {
+        "id": "OOD-02",
+        "question": "How do I bake a gluten-free chocolate chip cookie at 350 degrees?",
+        "is_answerable": false,
+        "was_refused": true,
+        "top_score": 1.4499674762191717e-05,
+        "citations_count": 0,
+        "latency_ms": 68.98
+      },
+      {
+        "id": "OOD-03",
+        "question": "What is the dormitory curfew time on weekends for postgraduate doctoral students?",
+        "is_answerable": false,
+        "was_refused": true,
+        "top_score": 2.1501056835404597e-05,
+        "citations_count": 0,
+        "latency_ms": 104.65
+      },
+      {
+        "id": "OOD-04",
+        "question": "Does NexaCorp provide company cars or corporate lease vehicles for sales engineers?",
+        "is_answerable": false,
+        "was_refused": true,
+        "top_score": 0.013668157160282135,
+        "citations_count": 0,
+        "latency_ms": 72.58
+      }
+    ],
+    "pipeline_name": "Full System (Hybrid + Cross-Encoder Reranker)"
+  }
+]

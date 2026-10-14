@@ -1,0 +1,152 @@
+[
+  {
+    "id": "UNIV-01",
+    "domain": "university_academic_regulations_2025",
+    "question": "What is the minimum attendance percentage required to be eligible for the End-Semester Examination?",
+    "is_answerable": true,
+    "expected_doc": "university_academic_regulations_2025",
+    "expected_page": 2,
+    "ground_truth": "A student must maintain a minimum attendance of 75% in aggregate across all lectures, tutorials, and practical laboratory sessions in each registered course.",
+    "key_entities": ["75%", "attendance", "End-Semester Examination"]
+  },
+  {
+    "id": "UNIV-02",
+    "domain": "university_academic_regulations_2025",
+    "question": "Under what conditions can attendance shortage be condoned on medical grounds, and what is the lowest condonable percentage?",
+    "is_answerable": true,
+    "expected_doc": "university_academic_regulations_2025",
+    "expected_page": 2,
+    "ground_truth": "Condonation may be granted by the Dean if attendance is between 65% and 74.9% due to verified serious illness, hospitalization, or representing the University in sports/academic events. A medical certificate must be submitted within 5 working days, approved by HOD, with a $50 fee per course. Attendance below 65% cannot be condoned.",
+    "key_entities": ["65%", "74.9%", "Dean of Academic Affairs", "$50"]
+  },
+  {
+    "id": "UNIV-03",
+    "domain": "university_academic_regulations_2025",
+    "question": "How many total credits are required to graduate with a B.Tech degree, and how many additional credits for Academic Honors?",
+    "is_answerable": true,
+    "expected_doc": "university_academic_regulations_2025",
+    "expected_page": 1,
+    "ground_truth": "Undergraduate B.Tech students must complete a cumulative minimum of 160 credits to graduate. For B.Tech with Academic Honors, students must earn an additional 18 honors credits.",
+    "key_entities": ["160 credits", "18 honors credits"]
+  },
+  {
+    "id": "UNIV-04",
+    "domain": "university_academic_regulations_2025",
+    "question": "What is the penalty for Similarity Level 2 plagiarism in capstone theses?",
+    "is_answerable": true,
+    "expected_doc": "university_academic_regulations_2025",
+    "expected_page": 4,
+    "ground_truth": "Similarity Level 2 (25% to 50%) results in disqualification from the current semester's submission and deduction of one full letter grade.",
+    "key_entities": ["disqualification", "deduction of one full letter grade", "25% to 50%"]
+  },
+  {
+    "id": "HR-01",
+    "domain": "employee_hr_benefits_handbook",
+    "question": "What is the duration of the mandatory probationary period for newly hired employees at NexaCorp?",
+    "is_answerable": true,
+    "expected_doc": "employee_hr_benefits_handbook",
+    "expected_page": 1,
+    "ground_truth": "Newly hired full-time regular employees undergo a mandatory probationary period of six (6) months, with formal reviews at 90 and 180 days, and a possible extension of up to 3 additional months.",
+    "key_entities": ["six (6) months", "90-day", "180-day"]
+  },
+  {
+    "id": "HR-02",
+    "domain": "employee_hr_benefits_handbook",
+    "question": "How much paid primary caregiver parental leave is provided, and what is the eligibility criteria?",
+    "is_answerable": true,
+    "expected_doc": "employee_hr_benefits_handbook",
+    "expected_page": 2,
+    "ground_truth": "NexaCorp provides 16 consecutive weeks of 100% paid primary caregiver parental leave to all employees who have completed at least twelve (12) continuous months of employment.",
+    "key_entities": ["16 consecutive weeks", "100% paid", "twelve (12) continuous months"]
+  },
+  {
+    "id": "HR-03",
+    "domain": "employee_hr_benefits_handbook",
+    "question": "What is the maximum company 401(k) matching percentage and vesting schedule?",
+    "is_answerable": true,
+    "expected_doc": "employee_hr_benefits_handbook",
+    "expected_page": 3,
+    "ground_truth": "NexaCorp matches 100% on the first 4% contributed, and 50% on the next 2%, resulting in a maximum company match of 5%. Matching funds follow a 2-year graded vesting schedule: 50% after Year 1, 100% after Year 2.",
+    "key_entities": ["5%", "4%", "2%", "2-year graded vesting"]
+  },
+  {
+    "id": "HR-04",
+    "domain": "employee_hr_benefits_handbook",
+    "question": "What is the annual reimbursement ceiling for professional development, certifications, and conferences?",
+    "is_answerable": true,
+    "expected_doc": "employee_hr_benefits_handbook",
+    "expected_page": 4,
+    "ground_truth": "NexaCorp reimburses up to $2,500 per calendar year per employee for approved external certifications, university courses, and technical conferences.",
+    "key_entities": ["$2,500 per calendar year"]
+  },
+  {
+    "id": "MUNI-01",
+    "domain": "municipal_citizen_services_circular",
+    "question": "What is the rebate percentage for early settlement of annual property tax before June 30th?",
+    "is_answerable": true,
+    "expected_doc": "municipal_citizen_services_circular",
+    "expected_page": 1,
+    "ground_truth": "An immediate 10% rebate on total net property tax is awarded if the entire annual assessment is settled before June 30th.",
+    "key_entities": ["10% rebate", "June 30th"]
+  },
+  {
+    "id": "MUNI-02",
+    "domain": "municipal_citizen_services_circular",
+    "question": "What is the mandatory compensatory plantation ratio and penalty for felling a mature tree without permission?",
+    "is_answerable": true,
+    "expected_doc": "municipal_citizen_services_circular",
+    "expected_page": 2,
+    "ground_truth": "The applicant must plant ten (10) native saplings for every single tree felled and maintain them for three years. Unauthorized felling incurs a penalty of $500 per tree plus mandatory replantation.",
+    "key_entities": ["ten (10) native saplings", "$500 per tree"]
+  },
+  {
+    "id": "MUNI-03",
+    "domain": "municipal_citizen_services_circular",
+    "question": "What are the three tiers and resolution timelines of the citizen grievance escalation hierarchy?",
+    "is_answerable": true,
+    "expected_doc": "municipal_citizen_services_circular",
+    "expected_page": 3,
+    "ground_truth": "Level 1: Ward Field Engineer (48 hours). Level 2: Executive Municipal Engineer (72 hours if unresolved at Level 1). Level 3: Municipal Commissioner Public Hearing on Wednesdays (for grievances past 7 days).",
+    "key_entities": ["Ward Field Engineer", "48 hours", "Executive Municipal Engineer", "72 hours", "Municipal Commissioner"]
+  },
+  {
+    "id": "OOD-01",
+    "domain": "general_out_of_domain",
+    "question": "What is the capital city of Australia and what is its population?",
+    "is_answerable": false,
+    "expected_doc": null,
+    "expected_page": null,
+    "ground_truth": "I cannot answer this question based on the provided documents. The documents cover university academic regulations, corporate HR policies, and municipal circulars, and contain no information about Australian geography.",
+    "key_entities": []
+  },
+  {
+    "id": "OOD-02",
+    "domain": "general_out_of_domain",
+    "question": "How do I bake a gluten-free chocolate chip cookie at 350 degrees?",
+    "is_answerable": false,
+    "expected_doc": null,
+    "expected_page": null,
+    "ground_truth": "I cannot answer this question based on the provided documents. The provided corpus does not contain baking recipes or culinary instructions.",
+    "key_entities": []
+  },
+  {
+    "id": "OOD-03",
+    "domain": "unanswerable_domain_specific",
+    "question": "What is the dormitory curfew time on weekends for postgraduate doctoral students?",
+    "is_answerable": false,
+    "expected_doc": "university_academic_regulations_2025",
+    "expected_page": null,
+    "ground_truth": "I cannot answer this question based on the provided documents. The university academic regulations cover credits, attendance, grading, and plagiarism, but do not specify dormitory curfew rules.",
+    "key_entities": []
+  },
+  {
+    "id": "OOD-04",
+    "domain": "unanswerable_domain_specific",
+    "question": "Does NexaCorp provide company cars or corporate lease vehicles for sales engineers?",
+    "is_answerable": false,
+    "expected_doc": "employee_hr_benefits_handbook",
+    "expected_page": null,
+    "ground_truth": "I cannot answer this question based on the provided documents. The employee handbook covers health insurance, 401(k), travel per diem, and education reimbursement, but does not mention company car lease policies.",
+    "key_entities": []
+  }
+]

@@ -1,0 +1,27 @@
+# Python Bytecode and Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+
+# Streamlit Cache
+.streamlit/
+
+# Vector Indices and Embeddings Cache
+*.faiss
+*.pkl
+cache/
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Presentation output (can be committed or kept generated)
+~$*.pptx
